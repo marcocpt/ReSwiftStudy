@@ -55,6 +55,13 @@ final class AppRouter {
   // 2
   fileprivate func pushViewController(identifier: String, animated: Bool) {
     let viewController = instantiateViewController(identifier: identifier)
+    let newViewControllerType = type(of: viewController)
+    if let currentVc = navigationController.topViewController {
+      let currentViewControllerType = type(of: currentVc)
+      if currentViewControllerType == newViewControllerType {
+        return
+      }
+    }
     navigationController.pushViewController(viewController, animated: animated)
   }
 

@@ -10,10 +10,10 @@
 
 [ReSwift](https://github.com/ReSwift/ReSwift) 是一个轻量级的框架，能够帮助你很轻松的去构建一个 Redux 架构的app。当然它是用Swift 实现的。
 
-RxSwift 有以下四个模块
+ReSwift 有以下四个模块
 
 * **Views**： 响应 **Store** 的改变，并且把他们展示在页面上。views 发出 **Actions**。
-* **Actions**:发起app 种状态的改变。Action 是有 **Reducer** 操作的。
+* **Actions**:发起app 状态的改变。Action 是由 **Reducer** 操作的。
 * **Reducers**: 直接改变程序的状态，这些状态由 **Store** 来保存。
 * **Store**:保存当前的程序的状态。其他模块，比如说 **Views** 可以订阅这个状态，并且响应状态的改变。
 
@@ -162,7 +162,7 @@ let routingState: RoutingState
 
 *appReducer* 编译不过了！因为我们给 *AppState* 添加了 *routingState*，但是在初始化的时候并没有把这个东西传进去。现在还需要一个 reducer 来创建 *routingState*
 
-现在我们只有一个主 **Reducer**， 跟 state 类型，我们也可以通过 子Reducer 来将 Reducer 划分开来。
+现在我们只有一个主 **Reducer**， 跟 state 类型，我们也可以通过子Reducer 来将 Reducer 划分开来。
 
 <center>
 
@@ -198,7 +198,7 @@ return AppState(routingState: routingReducer(action: action,
 
 还记得 RoutingState 里面那个默认的 state `.menu` 吗？他就是 app 默认的状态。只是你还没有订阅它。
 
-任何的类都可以定于这个 store， 不仅仅是 **View**。当一个类订阅了这个 Store 之后，每次 state 的改变他都会得到通知。我们在 *AppRouter* 中订阅这个 Store， 然后收到通知之后，push 一个 Controller
+任何的类都可以订阅这个 store， 不仅仅是 **View**。当一个类订阅了这个 Store 之后，每次 state 的改变他都会得到通知。我们在 *AppRouter* 中订阅这个 Store， 然后收到通知之后，push 一个 Controller
 
 打开 **AppRouter.swift** 然后重新写 *AppRouter*
 
@@ -249,7 +249,7 @@ extension AppRouter :StoreSubscriber {
 2. *pushViewController* 用来初始化，并且 push 这个控制器。通过 identifier 加载的 StoryBoard 中的控制器。
 3. 让 *AppRouter* 响应 StoreSubscriber， 当 routingState 改变的时候，将新的值返回回来。
 4. 根控制器是不需要动画的，所以在这个地方判断一下根控制器。
-5. 当 state 发生改变，就可以去出 state.navigationState, push 出对应的 controller
+5. 当 state 发生改变，就可以取出 state.navigationState, push 出对应的 controller
 
 AppRouter 现在就就初始化 *menu* 然后将 *MenuTableViewController* push 出来
 
@@ -317,7 +317,7 @@ return AppState(routingState: routingReducer(action: action,
 
 现在有了 MenuState, 接下来就是要订阅它了。
 
-先在打开 **MenuTableViewController.swift**, 然后将代码改成这样:
+现在打开 **MenuTableViewController.swift**, 然后将代码改成这样:
 
 ```swift
 import ReSwift
@@ -369,7 +369,7 @@ extension MenuTableViewController: StoreSubscriber {
 
 > 可能已经发现了，ReSwift 使用了很多值类型变量，而不是对象类型。并且推荐使用声明式的 UI 代码。为什么呢？
 >
-> StoreSubscriber 中定义的 newState 回调了状态的改变。你可能会通过这样的方法去接货这个值
+> StoreSubscriber 中定义的 newState 回调了状态的改变。你可能会通过这样的方法去接收这个值
 >
 > ```swift
 > final class MenuTableViewController: UITableViewController {
@@ -397,7 +397,7 @@ extension MenuTableViewController: StoreSubscriber {
 
 做好了 View 接下来就来写 **Action** 了。
 
-Action 是 Store 中数据改变的原因。一个 Action 就是一个有很多变量结构体，这写变量也是这个 Action 的参数。 Reducer 处理一系列的 action， 然后改变 app 的状态。
+Action 是 Store 中数据改变的原因。一个 Action 就是一个有很多变量结构体，这些变量也是这个 Action 的参数。 Reducer 处理一系列的 action， 然后改变 app 的状态。
 
 我们现在先创建一个 Action， 打开 **RoutingAction.swift**
 
@@ -448,7 +448,7 @@ switch 语句用来判断是否传入的 action 是 RoutingAction。如果是，
 
 ## Updating the State
 
-这样去实现导航可能是由瑕疵的。当你点击 "New Game" 的时候，`RoutingState` 的 `navigationState` 就会从`menu` 变成 `game`。 但是当你点击 controller 的返回按钮的时候，navigationState 却没有改变。
+这样去实现导航可能是有瑕疵的。当你点击 "New Game" 的时候，`RoutingState` 的 `navigationState` 就会从`menu` 变成 `game`。 但是当你点击 controller 的返回按钮的时候，navigationState 却没有改变。
 
 在 ReSwift 中，让状态跟 UI 同步是很重要的，但是这又是最容易搞忘的东西。特别是向上面那样，由 UIKit 自动控制的东西。
 

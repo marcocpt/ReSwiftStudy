@@ -27,3 +27,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import ReSwift
+
+enum Category: String {
+  case pop, electrinic, rock, metal, rap
+  
+  static let allValue = [pop, electrinic, rock, metal, rap]
+}
+
+struct CategoriesState: StateType {
+  let categories: [Category]
+  var currentCategorySelected: Category
+  
+  init(currentCategory: Category) {
+    categories = Category.allValue
+    currentCategorySelected = currentCategory
+  }
+}

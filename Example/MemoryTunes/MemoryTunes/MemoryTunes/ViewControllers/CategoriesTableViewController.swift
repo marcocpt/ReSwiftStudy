@@ -28,8 +28,44 @@
  * THE SOFTWARE.
  */
 
-import UIKit
+import ReSwift
 
 final class CategoriesTableViewController: UITableViewController {
+  var tableDataSource: TableDataSource<UITableViewCell, Category>?
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    // 1
+    store.subscribe(self) {
+      $0.select {
+        $0.categoriesState
+      }
+    }
+  }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    store.unsubscribe(self)
+  }
+
+}
+
+extension CategoriesTableViewController {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // 2
+    store.dispatch(ChangeCategoryAction(categoryIndex: indexPath.row))
+  }
+}
+
+extension CategoriesTableViewController: StoreSubscriber {
+  func newState(state: CategoriesState) {
+    tableDataSource = TableDataSource(cellIdentifier: "CategoryCell", models: state.categories) {
+      $0.textLabel?.text = $1.rawValue.capitalized
+      // 3
+      $0.accessoryType = (state.currentCategorySelected == $1) ? .checkmark : .none
+      return $0
+    }
+    tableView.dataSource = tableDataSource
+    tableView.reloadData()
+  }
 }
