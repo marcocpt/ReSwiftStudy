@@ -27,3 +27,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import  ReSwift
+
+func gameReducer(action: Action, state: GameState?) -> GameState {
+  var state = state ?? GameState(memoryCards: [], showLoading: false,
+                                 gameFinishied: false)
+
+  switch action {
+  // 1
+  case _ as FetchTunesAction:
+    state = GameState(memoryCards: [], showLoading: true,
+                      gameFinishied: false)
+  // 2
+  case let setCardsAction as SetCardsAction:
+    state.memoryCards = generateNewCards(with: setCardsAction.cardImageUrls)
+    state.showLoading = false
+  case let flipCardAction as FlipCardAction:
+    state.memoryCards = flipCard(index: flipCardAction.cardIndexToFlip,
+                                 memoryCards: state.memoryCards)
+    state.gameFinishied = hasFinishedGame(cards: state.memoryCards)
+  default: break
+  }
+  return state
+}

@@ -737,7 +737,7 @@ struct SetCardsAction: Action {
 
 这个 action 用来设置 GameState 中图片的URL
 
-现在开始准备程序中第一个异步行为吧！在 **FetchTumesAction.swift** 中，添加下面的代码:
+现在开始准备程序中第一个异步行为吧！在 **FetchTunesAction.swift** 中，添加下面的代码:
 
 ```swift
 import ReSwift
@@ -758,7 +758,7 @@ struct FetchTunesAction: Action{}
 
 `fetchTunes` 返回一个 `FetchTunesAction`  这个 action 是用来验证请求的。
 
-打开 **OpenReducer.swift** 然后添加对这两个 action 的支持。把 `gameReducer` 中的代码改成下面这样：
+打开 **GameReducer.swift** 然后添加对这两个 action 的支持。把 `gameReducer` 中的代码改成下面这样：
 
 ```swift
  var state = state ?? GameState(memoryCards: [],
@@ -804,7 +804,7 @@ struct FetchTunesAction: Action{}
 1. 使用 Kingfisher 来缓存图片
 2. 判断是否展示图片
 
-下一步，实现 CollectionView。在 gameViewCotroller.swift 倒入 `import ReSwift` 然后在 `showGameFinishedAlert` 上面添加下面的代码:
+下一步，实现 CollectionView。在 GameViewController.swift 导入 `import ReSwift` 然后在 `showGameFinishedAlert` 上面添加下面的代码:
 
 ```swift
  var collectionDataSource: CollectionDataSource<CardCollectionViewCell, MemoryCard>?
@@ -838,7 +838,7 @@ struct FetchTunesAction: Action{}
 
 ```
 
-由于没有写 StoreSubscriber ，所以这里会有一点点的编译错误。我们先假设已经写了。这段代码，首先是订阅了取消订阅 gameState 然后:
+由于没有写 StoreSubscriber ，所以这里会有一点点的编译错误。我们先假设已经写了。这段代码，首先是订阅和取消订阅 gameState 然后:
 
 1. 派发 fetchTunes 来获取图片
 2. 使用 CollectiondataSource  来配置 cell 相关信息。
@@ -879,7 +879,7 @@ extension GameViewController: StoreSubscriber {
 
 游戏的逻辑是： 让用户翻转两张卡片的时候，如果它们是一眼的，就让他们保持，如果不一样就翻回去。用户的任务是在尽可能少的尝试之后翻转所有的卡片。
 
-现在需要一个翻转的事件。在 **OpenCardAction.swift** 中添加代码:
+现在需要一个翻转的事件。在 **FlipCardAction.swift** 中添加代码:
 
 ```swift
 import ReSwift
@@ -924,9 +924,9 @@ store.dispatch(FlipCardAction(cardIndexToFlip: indexPath.row))
 
 ## 结束语
 
-模版项目已经完整项目都在 [GitHub](https://github.com/CepheusSun/Translate/tree/master/demos/ReSwiftAndRedux) 
+模版项目已经完成，整个项目都在 [GitHub](https://github.com/CepheusSun/Translate/tree/master/demos/ReSwiftAndRedux) 上
 
-ReSwift 不仅仅是我们今天提到的内容。他还以很多:
+ReSwift 不仅仅是我们今天提到的内容。他还有很多:
 
 * **Middleware**: 中间件。swift目前还没有很好的办法来做切面。但是 ReSwift 解决了这个问题。可以使用ReSwift 的 [Middleware] 特性来解决这个问题。他能够让你轻松的切面(logging, 统计， 缓存)。
 * **Routing**： 在这个 app 中已经实现了自己的 Routing， 还有个更通用的解决方案[ReSwift-Routing](https://github.com/ReSwift/ReSwift-Router) 单这在社区还是一个还没有完全解决的问题。说不定解决它的人就是你！
