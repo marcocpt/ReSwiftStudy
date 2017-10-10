@@ -27,3 +27,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import  ReactiveReSwift
+
+let appReducer: Reducer<AppState> = { action, state in
+  return AppState()
+}

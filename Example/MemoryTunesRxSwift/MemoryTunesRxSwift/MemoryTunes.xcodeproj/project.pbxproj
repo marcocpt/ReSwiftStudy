@@ -38,6 +38,8 @@
 		3FC119871E428CB8006AF232 /* FlipCardAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC119861E428CB8006AF232 /* FlipCardAction.swift */; };
 		D1651016F32F983625AA0C9E /* Pods_MemoryTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */; };
 		D273B743DD9CDB3347E55383 /* Pods_MemoryTunesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */; };
+		DA4AE7241F8CC99000499051 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4AE7221F8CC7FE00499051 /* ReactiveReSwift.framework */; };
+		DA4AE7251F8CC99000499051 /* ReactiveReSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA4AE7221F8CC7FE00499051 /* ReactiveReSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,20 @@
 			remoteInfo = MemoryTunes;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DA4AE7261F8CC99000499051 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA4AE7251F8CC99000499051 /* ReactiveReSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0F378129D768A1F646389832 /* Pods-MemoryTunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4AE7241F8CC99000499051 /* ReactiveReSwift.framework in Frameworks */,
 				D1651016F32F983625AA0C9E /* Pods_MemoryTunes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +295,7 @@
 				3F8882631E3B9A70009D6A6E /* Resources */,
 				B7B2C6D9750E6C9A600F11BA /* [CP] Embed Pods Frameworks */,
 				4D44B1500D129626D06F0122 /* [CP] Copy Pods Resources */,
+				DA4AE7261F8CC99000499051 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -656,6 +674,10 @@
 			baseConfigurationReference = 910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MemoryTunes/Framework",
+				);
 				INFOPLIST_FILE = MemoryTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.MemoryTunes;
@@ -669,6 +691,10 @@
 			baseConfigurationReference = 0F378129D768A1F646389832 /* Pods-MemoryTunes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MemoryTunes/Framework",
+				);
 				INFOPLIST_FILE = MemoryTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.MemoryTunes;
