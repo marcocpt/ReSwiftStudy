@@ -30,12 +30,43 @@
 
 import UIKit
 
+import RxSwift
+
+enum RoutingDestination: String {
+  case menu = "MenuTableViewController"
+  case categories = "CategoriesTableViewController"
+  case game = "GameViewController"
+}
+
 final class AppRouter {
   
   let navigationController: UINavigationController
+
+  private let disposeBag = DisposeBag()
   
   init(window: UIWindow) {
     navigationController = UINavigationController()
     window.rootViewController = navigationController
+
+    store.observable.asObservable()
+      .map { $0.routingState }
+      .subscribe(onNext: { (state) in
+        let shouldsAnimate = self.navigationController.topViewController != nil
+        self.pushViewController(identifier: state.navigationState.rawValue, animated: shouldsAnimate)
+      })
+    	.disposed(by: disposeBag)
   }
+
+  // 2
+  fileprivate func  pushViewController(identifier: String, animated: Bool) {
+    let viewController = instantiateViewController(identifier: identifier)
+    navigationController.pushViewController(viewController, animated: animated)
+  }
+
+  fileprivate func instantiateViewController(identifier: String) -> UIViewController {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    return storyboard.instantiateViewController(withIdentifier: identifier)
+  }
+
 }
+

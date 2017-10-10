@@ -28,8 +28,13 @@
  * THE SOFTWARE.
  */
 
-import  ReactiveReSwift
+//import  ReactiveReSwift
 
 struct AppState {
-  
+  let routingState: RoutingState
+
+  init(routingState: RoutingState = RoutingState()) {
+		self.routingState = routingState
+  }
+
 }

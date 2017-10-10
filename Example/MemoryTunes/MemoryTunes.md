@@ -84,7 +84,7 @@ func appReducer(action: Action, state: AppState?) -> AppState {
 }
 ```
 
-**appReducer** 是一个接收 Action 并且返回改变之后的 AppState 的函数。参数 state 是程序当前的 state。 这个函数可以根据他接收的 Action 直接改变这个 状态。现在就可以很容易的创建一个 AppState 值了。
+**appReducer** 是一个接收 Action 并且返回改变之后的 AppState 的函数。参数 state 是程序当前的 state。 这个函数可以根据他接收的 Action 直接改变这个状态。现在就可以很容易的创建一个 AppState 值了。
 
 现在应该创建 Store 来保存 state 了。
 
@@ -102,13 +102,13 @@ import ReSwift
 var store = Store<AppState>(reducer: appReducer, state: nil)
 ```
 
-这段代码通过 appReducer 创建了一个全局的变量store，appReducer 是这个 Store 的主 Reducer，他包含了接收到action的时候，store 应该怎么改变的规则。因为这是一些准备工作，所以只是传递了一个 nil state 进去。
+这段代码通过 appReducenilr 创建了一个全局的变量store，appReducer 是这个 Store 的主 Reducer，他包含了接收到action的时候，store 应该怎么改变的规则。因为这是一些准备工作，所以只是传递了一个 nil state 进去。
 
 编译运行，当然，什么都看不见。因为还没写啊！
 
 ## App Routing
 
-现在可以创建第一个实质的 state了，可是使用 IB 的导航，或者是 routing。
+现在可以创建第一个实质的 state了，这是使用 IB 的导航，或者是 routing。
 
 App 路由在所有的架构模式中都是一个挑战，在 ReSwift 中也是。在 MemoryTunes 中将使用很简单的方法来做这件事情，首先需要通过 enum 定义所有的终点，然后让 AppState 持有当前的终点。AppRouter 就会响应这个值的改变，达到路由的目的。
 

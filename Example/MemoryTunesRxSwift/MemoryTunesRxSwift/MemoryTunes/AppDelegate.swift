@@ -30,6 +30,18 @@
 
 import UIKit
 
+import ReactiveReSwift
+import RxSwift
+
+//let middleware = Middleware<AppState>().sideEffect { _, _, action in
+//  print("Received action:")
+//  }.map { _, action in
+//    print(action)
+//    return action
+//  }
+
+let store = Store(reducer: appReducer, observable: Variable(AppState()))
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   

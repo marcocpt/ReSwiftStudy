@@ -1,8 +1,8 @@
 target 'MemoryTunes' do
   use_frameworks!
 
-  pod 'ReSwift', '~> 4.0.0'
-  pod 'RxSwift', '~> 3.6'
+  pod 'RxSwift', '~> 3.6.1'
+  pod 'ReactiveReSwift', '~>3.0.6'
   
   pod 'Kingfisher', '~> 3.3.3'
   
