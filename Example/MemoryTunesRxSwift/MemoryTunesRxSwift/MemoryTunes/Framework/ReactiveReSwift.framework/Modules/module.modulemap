@@ -1,0 +1,11 @@
+framework module ReactiveReSwift {
+  umbrella header "ReactiveReSwift.h"
+
+  export *
+  module * { export * }
+}
+
+module ReactiveReSwift.Swift {
+    header "ReactiveReSwift-Swift.h"
+    requires objc
+}
