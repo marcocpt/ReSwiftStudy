@@ -31,7 +31,7 @@
 //import ReactiveReSwift
 
 struct RoutingState {
-  let navigationState: RoutingDestination
+  var navigationState: RoutingDestination
 
   init(navigationState: RoutingDestination = .menu) {
     self.navigationState = navigationState

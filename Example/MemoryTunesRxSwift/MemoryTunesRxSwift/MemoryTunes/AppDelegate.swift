@@ -33,14 +33,14 @@ import UIKit
 import ReactiveReSwift
 import RxSwift
 
-//let middleware = Middleware<AppState>().sideEffect { _, _, action in
-//  print("Received action:")
-//  }.map { _, action in
-//    print(action)
-//    return action
-//  }
+let middleware = Middleware<AppState>().sideEffect { _, _, action in
+  print("Received action:")
+  }.map { _, action in
+    print(action)
+    return action
+  }
 
-let store = Store(reducer: appReducer, observable: Variable(AppState()))
+let store = Store(reducer: appReducer, observable: Variable(AppState()), middleware: middleware)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,6 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = window
     window.makeKeyAndVisible()
     appRouter = AppRouter(window: window)
+    
+    #if DEBUG
+      _ = Observable<Int>.interval(2, scheduler: MainScheduler.instance)
+        .subscribe(onNext: { _ in
+          print("Resource count \(RxSwift.Resources.total)")
+        })
+    #endif
     
     return true
   }

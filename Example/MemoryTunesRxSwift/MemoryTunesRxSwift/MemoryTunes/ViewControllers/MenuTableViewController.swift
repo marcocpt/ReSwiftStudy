@@ -30,6 +30,49 @@
 
 import UIKit
 
-final class MenuTableViewController: UITableViewController {
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
+import Then
+
+final class MenuTableViewController: UITableViewController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // 使用UITableViewController，在绑定前必须将dataSource设为nil
+    tableView.do {
+      $0.dataSource = nil
+      $0.delegate = nil
+      $0.rx.setDelegate(self).disposed(by: rx.disposeBag)
+    }
+    bind()
+
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    store.dispatch(RoutingAction(destination: .menu))
+  }
+  
+  func bind() {
+    store.observable.asObservable()
+      .map { $0.menuState.menuTitles }
+      .bind(to: tableView.rx.items(cellIdentifier: "TitleCell")) {
+        (_, title, cell) in
+        cell.textLabel?.text = title
+        cell.textLabel?.textAlignment = .center
+      }
+      .disposed(by: rx.disposeBag)
+    
+    tableView.rx.itemSelected
+      .throttle(0.5, latest: false, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { indexPath in
+        guard let destination = RoutingDestination(rawValue: indexPath.row) else {
+          fatalError()
+        }
+        store.dispatch(RoutingAction(destination: destination))
+      })
+      .disposed(by: rx.disposeBag)
+  }
 }

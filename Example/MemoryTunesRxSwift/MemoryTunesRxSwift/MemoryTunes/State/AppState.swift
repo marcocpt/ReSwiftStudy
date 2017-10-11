@@ -32,9 +32,17 @@
 
 struct AppState {
   let routingState: RoutingState
+  let menuState: MenuState
+  let categoriesState: CategoriesState
 
-  init(routingState: RoutingState = RoutingState()) {
+  init(routingState: RoutingState, menuState: MenuState, categoriesState: CategoriesState) {
 		self.routingState = routingState
+    self.menuState = menuState
+    self.categoriesState = categoriesState
+  }
+  
+  init() {
+    self.init(routingState: RoutingState(), menuState: MenuState(), categoriesState: CategoriesState())
   }
 
 }

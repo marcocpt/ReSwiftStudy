@@ -31,6 +31,9 @@
 import  ReactiveReSwift
 
 let appReducer: Reducer<AppState> = { action, state in
-  return AppState(routingState: routingReducer(action, state.routingState))
+  return AppState(routingState:
+    routingReducer(action, state.routingState),
+    menuState: menuReducer(action, state.menuState),
+    categoriesState: categoriesReducer(action, state.categoriesState))
 }
 

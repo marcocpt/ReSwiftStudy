@@ -19,7 +19,7 @@ ReSwift 有以下四个模块
 
 ReSwift 至少有以下这些优势:
 
-* **很强的约束力**：把一些代码放在不合适的地方往往具有很强的诱惑性，虽然这样写很方便。ReSwift 通过很强的约束力来避免这种情况。
+* **很强的约束力**：把一些代码放在不合适的地方往往具有很强的诱惑性，虽然这样写很方便。ReSwift 通过很强的约束力来避免这种情况。
 * **单向数据流**：多向数据流的代码在阅读和debug上都可能变成一场灾难。一个改变可能会带来一系列的连锁反应。而单向数据流就能让程序的运行更加具有可预测性，也能够减少阅读这些代码的痛苦。
 * **容易测试**：大多数的业务逻辑都在Reducer 中，这些都是纯的功能。
 * **复用性**：ReSwift 中的每个组件—Store、Reducer、Action ，都是能在各个平台独立运行的，可以很轻松的在iOS、macOS、或者tvOS 中复用这些模块。
@@ -304,7 +304,7 @@ func menuReducer(action: Action, state: MenuState?) -> MenuState {
 回到 **AppState.swift** 中, 添加
 
 ```swift
-let meunState: MenuState
+let menuState: MenuState
 ```
 
 编译又失败了，然后需要到 **AppReducer.swift** 中去修改这个编译错误。
@@ -582,7 +582,6 @@ private func saveCurrentCategoryStateToUserdefaults(category: Category) {
   userDefaults.set(category.rawValue, forKey: C.userDefaultCategoryKey)
   userDefaults.synchronize()
 }
-
 ```
 
 跟其他的 Reducer 一样，这些方法实现了一下比较复杂的状态的改变，并且将选择之后的状态通过 Userdefault 持久化。
@@ -609,7 +608,7 @@ let categoriesState: CategoriesState
         categoriesState: categoriesReducer(action: action, state: state?.categoriesState))
 ```
 
-现在还需要 View 了。现在需要在 CategoriesViewController 中去写这部分的 View
+现在还需要 View 了。现在需要在 CategoriesTableViewController 中去写这部分的 View
 
 ```swift
 import ReSwift
@@ -650,7 +649,6 @@ extension CategoriesTableViewController: StoreSubscriber {
     tableView.reloadData()
   }
 }
-
 ```
 
 这部分的代码跟 MenuTableViewController 差不多。注释中标记的内容分别是：

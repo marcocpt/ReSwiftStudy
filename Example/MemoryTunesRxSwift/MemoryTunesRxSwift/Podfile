@@ -2,12 +2,32 @@ target 'MemoryTunes' do
   use_frameworks!
 
   pod 'RxSwift', '~> 3.6.1'
+  pod 'RxCocoa', '~> 3.6.1'
+  pod 'RxDataSources', '~> 2.0.2'
+  pod 'NSObject+Rx', '~>3.0'
   pod 'ReactiveReSwift', '~>3.0.6'
   
   pod 'Kingfisher', '~> 3.3.3'
   
+  pod 'Then', '~> 2.2'
+  
   target 'MemoryTunesTests' do
     inherit! :search_paths
 
+  end
+end
+
+# enable tracing resources
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'RxSwift'
+      target.build_configurations.each do |config|
+        #config.build_settings['CONFIGURATION_BUILD_DIR'] = '$PODS_CONFIGURATION_BUILD_DIR'
+        if config.name == 'Debug'
+          config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D',
+          'TRACE_RESOURCES']
+        end
+      end
+    end
   end
 end

@@ -29,7 +29,28 @@
  */
 
 import UIKit
+import ReactiveReSwift
 
 final class CategoriesTableViewController: UITableViewController {
-
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    tableView.do {
+      $0.dataSource = nil
+      $0.delegate = nil
+      $0.rx.setDelegate(self).disposed(by: rx.disposeBag)
+    }
+    bind()
+  }
+  
+  func bind() {
+    store.observable.asObservable()
+      .map { $0.categoriesState }
+      .bind(to: tableView.rx.items(cellIdentifier: "CategoryCell")) {
+        (x, title, cell) in
+        cell.textLabel?.text = title
+        cell.accessoryType = state.currentCategorySelected
+      }
+      .disposed(by: rx.disposeBag)
+  }
 }

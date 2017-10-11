@@ -27,3 +27,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+//import RxSwift
+
+struct MenuState {
+  var menuTitles: [String]
+  
+  init() {
+    menuTitles = ["NewGame", "Choose Category"]
+  }
+}

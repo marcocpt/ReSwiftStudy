@@ -31,12 +31,7 @@
 import UIKit
 
 import RxSwift
-
-enum RoutingDestination: String {
-  case menu = "MenuTableViewController"
-  case categories = "CategoriesTableViewController"
-  case game = "GameViewController"
-}
+import NSObject_Rx
 
 final class AppRouter {
   
@@ -50,9 +45,10 @@ final class AppRouter {
 
     store.observable.asObservable()
       .map { $0.routingState }
-      .subscribe(onNext: { (state) in
-        let shouldsAnimate = self.navigationController.topViewController != nil
-        self.pushViewController(identifier: state.navigationState.rawValue, animated: shouldsAnimate)
+      .subscribe(onNext: { [weak self](state) in
+        guard let strongSelf = self else { return }
+        let shouldsAnimate = strongSelf.navigationController.topViewController != nil
+        strongSelf.pushViewController(identifier: state.navigationState.name, animated: shouldsAnimate)
       })
     	.disposed(by: disposeBag)
   }
@@ -60,6 +56,13 @@ final class AppRouter {
   // 2
   fileprivate func  pushViewController(identifier: String, animated: Bool) {
     let viewController = instantiateViewController(identifier: identifier)
+    let newViewControllerType = type(of: viewController)
+    if let currentViewController = navigationController.topViewController {
+      let currentViewControllerType = type(of: currentViewController)
+      if currentViewControllerType == newViewControllerType {
+        return
+      }
+    }
     navigationController.pushViewController(viewController, animated: animated)
   }
 
@@ -70,3 +73,16 @@ final class AppRouter {
 
 }
 
+enum RoutingDestination: Int {
+  case menu = -1 ,game, categories
+}
+
+extension RoutingDestination {
+  var name: String {
+    switch self {
+    case .menu: return "MenuTableViewController"
+    case .game: return "GameViewController"
+    case .categories: return "CategoriesTableViewController"
+    }
+  }
+}

@@ -27,3 +27,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import ReactiveReSwift
+
+private struct CategoriesReducerConstants {
+  static let userDefaultCategoryKey = "currentCategoryKey"
+}
+
+private typealias C = CategoriesReducerConstants
+
+let categoriesReducer: Reducer<CategoriesState> = { action, state in
+  var currentCategory = Category.pop
+  if let loadedCategory = getCurrentCategoryStateFromUserDefaults() {
+    currentCategory = loadedCategory
+  }
+  var state: CategoriesState = state
+  
+  switch action {
+  case let changeCategoryAction as ChangeCategoryAction:
+    let newCategory = state.categories[changeCategoryAction.categoryIndex]
+    state.currentCategorySelected = newCategory
+    saveCurrentCategoryStateToUserdefaults(category: newCategory)
+  default: break
+  }
+  return state
+}
+
+// 3
+private func getCurrentCategoryStateFromUserDefaults() -> Category?
+{
+  let userDefaults = UserDefaults.standard
+  let rawValue = userDefaults.string(forKey: C.userDefaultCategoryKey)
+  if let rawValue = rawValue {
+    return Category(rawValue: rawValue)
+  } else {
+    return nil
+  }
+}
+
+// 4
+private func saveCurrentCategoryStateToUserdefaults(category: Category) {
+  let userDefaults = UserDefaults.standard
+  userDefaults.set(category.rawValue, forKey: C.userDefaultCategoryKey)
+  userDefaults.synchronize()
+}
