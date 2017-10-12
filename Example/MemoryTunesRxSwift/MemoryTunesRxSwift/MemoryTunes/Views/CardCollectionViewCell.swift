@@ -34,4 +34,10 @@ import Kingfisher
 final class CardCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var cardImageView: UIImageView!
   
+  func configCell(with cardState: MemoryCard) {
+    let url = URL(string: cardState.imageUrl)
+    cardImageView.kf.setImage(with: url)
+    cardImageView.alpha = (cardState.isAlreadyGuessed || cardState.isFlipped) ?
+      1 : 0
+  }
 }

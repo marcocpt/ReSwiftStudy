@@ -27,3 +27,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import RxSwift
+import ReactiveReSwift
+
+func fetchTunes(state: AppState, store: Store<Variable<AppState>>) -> FetchTunesAction {
+  let category = state.categoriesState.currentCategorySelected
+  iTunesAPI.searchFor(category: category.rawValue) {
+    store.dispatch(SetCardsAction(cardImageUrls: $0))
+  }
+  return FetchTunesAction()
+}
+
+struct FetchTunesAction: Action {}

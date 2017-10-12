@@ -28,6 +28,21 @@
  * THE SOFTWARE.
  */
 
+import ReactiveReSwift
+
+struct GameState {
+  var memoryCards: [MemoryCard]
+  var showLoading: Bool
+  var gameFinishied: Bool
+  
+  init(memoryCards: [MemoryCard] = [], showLoading: Bool = false,
+       gameFinishied: Bool = false) {
+    self.memoryCards = memoryCards
+    self.showLoading = showLoading
+    self.gameFinishied = gameFinishied
+  }
+  
+}
 
 struct MemoryCard {
   let imageUrl: String

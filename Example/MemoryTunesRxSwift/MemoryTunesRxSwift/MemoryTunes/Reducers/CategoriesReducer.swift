@@ -38,10 +38,11 @@ private typealias C = CategoriesReducerConstants
 
 let categoriesReducer: Reducer<CategoriesState> = { action, state in
   var state: CategoriesState = state
+  
   if let loadedCategory = getCurrentCategoryStateFromUserDefaults() {
     state.currentCategorySelected = loadedCategory
-  }
-  
+  } 
+
   switch action {
   case let changeCategoryAction as ChangeCategoryAction:
     let newCategory = state.categories[changeCategoryAction.categoryIndex]
@@ -52,7 +53,6 @@ let categoriesReducer: Reducer<CategoriesState> = { action, state in
   return state
 }
 
-// 3
 private func getCurrentCategoryStateFromUserDefaults() -> Category?
 {
   let userDefaults = UserDefaults.standard
@@ -64,7 +64,6 @@ private func getCurrentCategoryStateFromUserDefaults() -> Category?
   }
 }
 
-// 4
 private func saveCurrentCategoryStateToUserdefaults(category: Category) {
   let userDefaults = UserDefaults.standard
   userDefaults.set(category.rawValue, forKey: C.userDefaultCategoryKey)

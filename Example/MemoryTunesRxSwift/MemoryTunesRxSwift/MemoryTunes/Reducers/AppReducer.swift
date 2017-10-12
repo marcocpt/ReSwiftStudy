@@ -34,6 +34,7 @@ let appReducer: Reducer<AppState> = { action, state in
   return AppState(routingState:
     routingReducer(action, state.routingState),
     menuState: menuReducer(action, state.menuState),
-    categoriesState: categoriesReducer(action, state.categoriesState))
+    categoriesState: categoriesReducer(action, state.categoriesState),
+    gameState: gameReducer(action, state.gameState))
 }
 

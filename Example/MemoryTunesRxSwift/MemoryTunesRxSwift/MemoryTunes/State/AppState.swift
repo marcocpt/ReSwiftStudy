@@ -34,15 +34,17 @@ struct AppState {
   let routingState: RoutingState
   let menuState: MenuState
   let categoriesState: CategoriesState
+  let gameState: GameState
 
-  init(routingState: RoutingState, menuState: MenuState, categoriesState: CategoriesState) {
+  init(routingState: RoutingState, menuState: MenuState, categoriesState: CategoriesState, gameState: GameState) {
 		self.routingState = routingState
     self.menuState = menuState
     self.categoriesState = categoriesState
+    self.gameState = gameState
   }
   
   init() {
-    self.init(routingState: RoutingState(), menuState: MenuState(), categoriesState: CategoriesState())
+    self.init(routingState: RoutingState(), menuState: MenuState(), categoriesState: CategoriesState(), gameState: GameState())
   }
 
 }

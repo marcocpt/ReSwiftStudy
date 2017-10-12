@@ -27,3 +27,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import ReactiveReSwift
+
+let gameReducer: Reducer<GameState> = { action, state in
+  var state: GameState = state
+  
+  switch action {
+  case _ as FetchTunesAction:
+    state = GameState(memoryCards: [], showLoading: true, gameFinishied: false)
+  case let setCardsAction as SetCardsAction:
+    state.memoryCards = generateNewCards(with: setCardsAction.cardImageUrls)
+    state.showLoading = false
+  case let flipCardAction as FlipCardAction:
+    state.memoryCards = flipCard(index: flipCardAction.cardIndexToFlip, memoryCards: state.memoryCards)
+    state.gameFinishied = hasFinishedGame(cards: state.memoryCards)
+  default: break
+  }
+  return state
+}

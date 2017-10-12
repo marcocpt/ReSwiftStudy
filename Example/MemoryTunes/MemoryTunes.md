@@ -749,7 +749,6 @@ func fetchTunes(state: AppState, store: Store<AppState>) -> FetchTunesAction {
 
 
 struct FetchTunesAction: Action{}
-
 ```
 
 `fetchTunes`  通过 `itunesAPI` 获取了图片。然后在闭包中将结果派发出来。 ReSwift 中的异步任务就是这么简单。
@@ -833,7 +832,6 @@ struct FetchTunesAction: Action{}
     }
     collectionView.dataSource = collectionDataSource
   }
-
 ```
 
 由于没有写 StoreSubscriber ，所以这里会有一点点的编译错误。我们先假设已经写了。这段代码，首先是订阅和取消订阅 gameState 然后:
@@ -875,7 +873,7 @@ extension GameViewController: StoreSubscriber {
 
 ## Play
 
-游戏的逻辑是： 让用户翻转两张卡片的时候，如果它们是一眼的，就让他们保持，如果不一样就翻回去。用户的任务是在尽可能少的尝试之后翻转所有的卡片。
+游戏的逻辑是： 让用户翻转两张卡片的时候，如果它们是一样的，就让他们保持，如果不一样就翻回去。用户的任务是在尽可能少的尝试之后翻转所有的卡片。
 
 现在需要一个翻转的事件。在 **FlipCardAction.swift** 中添加代码:
 

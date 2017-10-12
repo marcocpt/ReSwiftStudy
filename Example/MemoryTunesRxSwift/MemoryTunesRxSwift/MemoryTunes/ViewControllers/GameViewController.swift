@@ -30,10 +30,60 @@
 
 import UIKit
 
+import RxSwift
+import ReactiveReSwift
+
 final class GameViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let state = store.observable.asObservable()
+    
+    state.take(1)
+      .debug("single")
+      .subscribe(onNext: { [weak self ](state) in
+        guard let strongSelf = self else { return }
+        store.dispatch(fetchTunes(state: state, store: store))
+        strongSelf.loadingIndicator.hidesWhenStopped = true
+      })
+      .disposed(by: rx.disposeBag)
+   
+    state.skip(1)
+      .map { $0.gameState.memoryCards }
+      .debug("1")
+      .bind(to: collectionView.rx.items(cellIdentifier: "CardCell", cellType: CardCollectionViewCell.self)) {
+        (_, card, cell) in
+        cell.configCell(with: card)
+      }
+      .disposed(by: rx.disposeBag)
+  
+    state.skip(1)
+      .debug("2")
+      .subscribe(onNext: { [weak self] (state) in
+        guard let strongSelf = self else { return }
+        state.gameState.showLoading ?
+          strongSelf.loadingIndicator.startAnimating() :
+          strongSelf.loadingIndicator.stopAnimating()
+        if state.gameState.gameFinishied {
+          DispatchQueue.main.sync {
+            strongSelf.showGameFinishedAlert()
+          }
+          store.dispatch(fetchTunes(state: state, store: store))
+        }
+      })
+      .disposed(by: rx.disposeBag)
+    
+    collectionView.rx.itemSelected.asObservable()
+      .subscribe(onNext: { (indexPath) in
+        store.dispatch(FlipCardAction(cardIndexToFlip: indexPath.row))
+      })
+      .disposed(by: rx.disposeBag)
+
+  }
   
   fileprivate func showGameFinishedAlert() {
     let alertController = UIAlertController(title: "Congratulations!",
@@ -47,8 +97,3 @@ final class GameViewController: UIViewController {
   }
 }
 
-// MARK: - UICollectionViewDelegate
-extension GameViewController: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-  }
-}
