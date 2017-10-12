@@ -54,7 +54,7 @@ final class GameViewController: UIViewController {
    
     state.skip(1)
       .map { $0.gameState.memoryCards }
-      .debug("1")
+      .debug("collectionView items")
       .bind(to: collectionView.rx.items(cellIdentifier: "CardCell", cellType: CardCollectionViewCell.self)) {
         (_, card, cell) in
         cell.configCell(with: card)
@@ -62,22 +62,32 @@ final class GameViewController: UIViewController {
       .disposed(by: rx.disposeBag)
   
     state.skip(1)
-      .debug("2")
-      .subscribe(onNext: { [weak self] (state) in
+      .map { $0.gameState.showLoading }
+      .distinctUntilChanged()
+      .debug("loadingIndicator")
+      .subscribe(onNext: { [weak self] (showLoading) in
         guard let strongSelf = self else { return }
-        state.gameState.showLoading ?
-          strongSelf.loadingIndicator.startAnimating() :
+        showLoading ? strongSelf.loadingIndicator.startAnimating() :
           strongSelf.loadingIndicator.stopAnimating()
-        if state.gameState.gameFinishied {
-          DispatchQueue.main.sync {
-            strongSelf.showGameFinishedAlert()
-          }
-          store.dispatch(fetchTunes(state: state, store: store))
-        }
       })
       .disposed(by: rx.disposeBag)
+
+    state.skip(1)
+      .filter { $0.gameState.gameFinishied }
+      // FIXME: 不加“observeOn(MainScheduler.asyncInstance)” 就出现 ⚠️ Reentrancy anomaly was detected. ⚠
+      // fetchTunes会再次发射事件
+      .observeOn(MainScheduler.asyncInstance)
+      .debug("gameFinishied")
+      .subscribe(onNext: { [weak self] (state) in
+        guard let strongSelf = self else { return }
+        store.dispatch(fetchTunes(state: state, store: store))
+      	strongSelf.showGameFinishedAlert()
+      })
+    	.disposed(by: rx.disposeBag)
+
     
     collectionView.rx.itemSelected.asObservable()
+      .debug("itemSelected")
       .subscribe(onNext: { (indexPath) in
         store.dispatch(FlipCardAction(cardIndexToFlip: indexPath.row))
       })
