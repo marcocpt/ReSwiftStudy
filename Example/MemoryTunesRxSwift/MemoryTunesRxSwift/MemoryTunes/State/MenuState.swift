@@ -31,7 +31,7 @@
 //import RxSwift
 
 struct MenuState {
-  var menuTitles: [String]
+  let menuTitles: [String]
   
   init() {
     menuTitles = ["NewGame", "Choose Category"]

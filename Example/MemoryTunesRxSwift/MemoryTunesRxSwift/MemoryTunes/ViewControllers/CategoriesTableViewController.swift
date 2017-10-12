@@ -29,6 +29,8 @@
  */
 
 import UIKit
+
+import RxSwift
 import ReactiveReSwift
 
 final class CategoriesTableViewController: UITableViewController {
@@ -46,11 +48,25 @@ final class CategoriesTableViewController: UITableViewController {
   func bind() {
     store.observable.asObservable()
       .map { $0.categoriesState }
+      .map { state in
+        state.categories
+          .map { ($0, state.currentCategorySelected) }
+      }
       .bind(to: tableView.rx.items(cellIdentifier: "CategoryCell")) {
-        (x, title, cell) in
-        cell.textLabel?.text = title
-        cell.accessoryType = state.currentCategorySelected
+        (_, categoryTuple , cell) in
+        cell.textLabel?.text = categoryTuple.0.rawValue.capitalized
+        cell.accessoryType = (categoryTuple.1 == categoryTuple.0) ?
+          .checkmark : .none
       }
       .disposed(by: rx.disposeBag)
+    
+    tableView.rx.itemSelected.asObservable()
+      .subscribe(onNext: { indexPath in
+        store.dispatch(ChangeCategoryAction(categoryIndex: indexPath.row))
+      })
+      .disposed(by: rx.disposeBag)
+      
   }
+  
+  
 }

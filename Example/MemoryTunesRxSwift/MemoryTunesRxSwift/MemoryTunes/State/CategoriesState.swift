@@ -34,14 +34,12 @@ enum Category:String {
 }
 
 struct CategoriesState {
-  let categories = Category.allValue
-  var currentCategorySelected: Category?
+  let categories: [Category]
+  var currentCategorySelected: Category
   
-  init(currentCategory: Category) {
+  init(currentCategory: Category = .pop) {
+    categories = Category.allValue
     currentCategorySelected = currentCategory
   }
   
-  init() {
-    currentCategorySelected = nil
-  }
 }

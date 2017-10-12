@@ -37,11 +37,10 @@ private struct CategoriesReducerConstants {
 private typealias C = CategoriesReducerConstants
 
 let categoriesReducer: Reducer<CategoriesState> = { action, state in
-  var currentCategory = Category.pop
-  if let loadedCategory = getCurrentCategoryStateFromUserDefaults() {
-    currentCategory = loadedCategory
-  }
   var state: CategoriesState = state
+  if let loadedCategory = getCurrentCategoryStateFromUserDefaults() {
+    state.currentCategorySelected = loadedCategory
+  }
   
   switch action {
   case let changeCategoryAction as ChangeCategoryAction:
