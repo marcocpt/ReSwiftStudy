@@ -39,6 +39,7 @@
 		85B688D41F8CF48F00CA6BF4 /* ReactiveReSwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */; };
 		D1651016F32F983625AA0C9E /* Pods_MemoryTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */; };
 		D273B743DD9CDB3347E55383 /* Pods_MemoryTunesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */; };
+		DA6EBA9D1F905B7F00A6C6AF /* Store+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.debug.xcconfig"; sourceTree = "<group>"; };
 		A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveReSwiftBridge.swift; sourceTree = "<group>"; };
+		DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+extensions.swift"; sourceTree = "<group>"; };
 		ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC5D309E32012CF290EE225 /* Pods-MemoryTunesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunesTests/Pods-MemoryTunesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */,
+				DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				3F257E361E40FCD800DF8465 /* iTunesAPI.swift in Sources */,
 				3F257E2F1E40F8E700DF8465 /* GameState.swift in Sources */,
 				3FA6744A1E3E963400129D0B /* MenuReducer.swift in Sources */,
+				DA6EBA9D1F905B7F00A6C6AF /* Store+extensions.swift in Sources */,
 				3FA674401E3E87B800129D0B /* AppState.swift in Sources */,
 				3F7F976A1E4275ED007C317A /* SetCardsAction.swift in Sources */,
 				3F257E2D1E40E51800DF8465 /* ChangeCategoryAction.swift in Sources */,

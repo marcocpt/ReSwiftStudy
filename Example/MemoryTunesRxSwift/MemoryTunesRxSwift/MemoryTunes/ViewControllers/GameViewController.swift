@@ -41,19 +41,13 @@ final class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let state = store.observable.asObservable()
+    store.dispatch(fetchTunes)
+    loadingIndicator.hidesWhenStopped = true
     
-    state.take(1)
-      .debug("single")
-      .subscribe(onNext: { [weak self ](state) in
-        guard let strongSelf = self else { return }
-        store.dispatch(fetchTunes(state: state, store: store))
-        strongSelf.loadingIndicator.hidesWhenStopped = true
-      })
-      .disposed(by: rx.disposeBag)
-   
+    let state = store.observable.asObservable().map { $0.gameState }
+
     state.skip(1)
-      .map { $0.gameState.memoryCards }
+      .map { $0.memoryCards }
       .debug("collectionView items")
       .bind(to: collectionView.rx.items(cellIdentifier: "CardCell", cellType: CardCollectionViewCell.self)) {
         (_, card, cell) in
@@ -61,9 +55,8 @@ final class GameViewController: UIViewController {
       }
       .disposed(by: rx.disposeBag)
   
-    state.skip(1)
-      .map { $0.gameState.showLoading }
-      .distinctUntilChanged()
+    state
+      .map { $0.showLoading }
       .debug("loadingIndicator")
       .subscribe(onNext: { [weak self] (showLoading) in
         guard let strongSelf = self else { return }
@@ -73,14 +66,14 @@ final class GameViewController: UIViewController {
       .disposed(by: rx.disposeBag)
 
     state.skip(1)
-      .filter { $0.gameState.gameFinishied }
-      // FIXME: 不加“observeOn(MainScheduler.asyncInstance)” 就出现 ⚠️ Reentrancy anomaly was detected. ⚠
+      .filter { $0.gameFinishied }
+      // FIXME: 不加“observeOn(MainScheduler.asyncInstance)” 就出现 ⚠️ Reentrancy anomaly was detected. ⚠️
       // fetchTunes会再次发射事件
       .observeOn(MainScheduler.asyncInstance)
       .debug("gameFinishied")
       .subscribe(onNext: { [weak self] (state) in
         guard let strongSelf = self else { return }
-        store.dispatch(fetchTunes(state: state, store: store))
+        store.dispatch(fetchTunes)
       	strongSelf.showGameFinishedAlert()
       })
     	.disposed(by: rx.disposeBag)

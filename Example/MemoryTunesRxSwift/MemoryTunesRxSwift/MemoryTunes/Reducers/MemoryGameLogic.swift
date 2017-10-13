@@ -32,7 +32,7 @@ import Foundation
 import GameplayKit
 
 private struct MemoryGameConstants {
-  static let numberOfUniqueCards = 2
+  static let numberOfUniqueCards = 8
 }
 private typealias C = MemoryGameConstants
 
