@@ -172,6 +172,7 @@
 		3F8882671E3B9A70009D6A6E /* MemoryTunes */ = {
 			isa = PBXGroup;
 			children = (
+				DA6EBAA61F9098F200A6C6AF /* ReSwiftRouter */,
 				3F3AE40D1E436EE20080F98E /* DataSources */,
 				3F7F97631E42703E007C317A /* Views */,
 				3F257E341E40FC9800DF8465 /* Networking */,
@@ -251,6 +252,13 @@
 				A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA6EBAA61F9098F200A6C6AF /* ReSwiftRouter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ReSwiftRouter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,11 +456,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReSwiftRouter/ReSwiftRouter.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwiftRouter.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

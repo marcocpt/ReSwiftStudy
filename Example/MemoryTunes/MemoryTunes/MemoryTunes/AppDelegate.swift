@@ -30,7 +30,7 @@
 
 import ReSwift
 
-var store = Store(reducer: appReduce, state: nil)
+var store = Store(reducer: appReducer, state: nil)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
