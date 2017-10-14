@@ -29,6 +29,7 @@
  */
 
 import ReSwift
+import ReSwiftRouter
 
 final class CategoriesTableViewController: UITableViewController {
   var tableDataSource: TableDataSource<UITableViewCell, Category>?
@@ -47,6 +48,16 @@ final class CategoriesTableViewController: UITableViewController {
     super.viewDidDisappear(animated)
     store.unsubscribe(self)
   }
+
+//  override func didMove(toParentViewController parent: UIViewController?) {
+//    if parent == nil {
+//      // Required to update the route, when this VC was dismissed through back button from
+//      // NavigationController, since we can't intercept the back button
+//      if store.state.navigationState.route == [RouteID.menu.rawValue, RouteID.categories.rawValue] {
+//        store.dispatch(SetRouteAction([RouteID.menu.rawValue]))
+//      }
+//    }
+//  }
 
 }
 

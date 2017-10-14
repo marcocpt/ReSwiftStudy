@@ -29,6 +29,7 @@
  */
 
 import ReSwift
+import ReSwiftRouter
 
 final class MenuTableViewController: UITableViewController {
   // 1
@@ -72,13 +73,17 @@ extension MenuTableViewController: StoreSubscriber {
 
 extension MenuTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    var routeDestination: RoutingDestination = .categories
+    var route = [RouteID.menu.rawValue]
     switch indexPath.row {
-    case 0: routeDestination = .game
-    case 1: routeDestination = .categories
-    default: break
+    case 0:
+			route.append(RouteID.game.rawValue)
+    case 1:
+      route.append(RouteID.categories.rawValue)
+    default:
+      break
     }
-    store.dispatch(RoutingAction(destination: routeDestination))
+    let routeAction = ReSwiftRouter.SetRouteAction(route)
+    store.dispatch(routeAction)
   }
 }
 

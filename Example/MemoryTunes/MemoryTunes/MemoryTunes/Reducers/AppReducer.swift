@@ -29,10 +29,11 @@
  */
 
 import ReSwift
+import ReSwiftRouter
 
 func appReducer(action: Action, state: AppState?) -> AppState {
   return AppState(
-    routingState: routingReducer(action: action, state: state?.routingState),
+    navigationState: NavigationReducer.handleAction(action, state: state?.navigationState),
     menuState: menuReducer(action: action, state: state?.menuState),
     categoriesState: categoriesReducer(action: action,
                                        state: state?.categoriesState),

@@ -29,9 +29,10 @@
  */
 
 import ReSwift
+import ReSwiftRouter
 
-struct AppState: StateType {
-  let routingState: RoutingState
+struct AppState: StateType, HasNavigationState {
+  var navigationState: NavigationState
   let menuState: MenuState
   let categoriesState: CategoriesState
   let gameState: GameState

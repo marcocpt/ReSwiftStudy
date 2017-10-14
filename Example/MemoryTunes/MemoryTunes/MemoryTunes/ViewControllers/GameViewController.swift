@@ -29,6 +29,7 @@
  */
 
 import ReSwift
+import ReSwiftRouter
 
 final class GameViewController: UIViewController {
   

@@ -29,21 +29,35 @@
  */
 
 import ReSwift
+import ReSwiftRouter
 
-var store = Store(reducer: appReducer, state: nil)
+var store = RecordingMainStore<AppState>(reducer: appReducer, state: nil, typeMaps: [], recording: "recording.json")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-  var appRouter: AppRouter?
+  var appRouter: Router<AppState>!
+  var rootViewController: Routable!
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     let window = UIWindow(frame: UIScreen.main.bounds)
     self.window = window
+
+    /*
+     Set a dummy VC to satisfy UIKit
+     Router will set correct VC throug async call which means
+     window would not have rootVC at completion of this method
+     which causes a crash.
+     */
+    window.rootViewController = UIViewController()
+    let rootRoutable = RootRoutable(window: window)
+    appRouter = Router(store: store, rootRoutable: rootRoutable) { (state) -> Subscription<NavigationState> in
+      state.select { $0.navigationState }
+    }
+    store.dispatch(ReSwiftRouter.SetRouteAction([RouteID.menu.rawValue]))
     window.makeKeyAndVisible()
-    appRouter = AppRouter(window: window)
     
     return true
   }

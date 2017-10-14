@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F257E1E1E40A2CB00DF8465 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E1D1E40A2CB00DF8465 /* AppRouter.swift */; };
-		3F257E211E40A30000DF8465 /* RoutingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E201E40A30000DF8465 /* RoutingAction.swift */; };
-		3F257E231E40B10700DF8465 /* RoutingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E221E40B10700DF8465 /* RoutingState.swift */; };
-		3F257E251E40B1F300DF8465 /* RoutingReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E241E40B1F300DF8465 /* RoutingReducer.swift */; };
 		3F257E271E40CA5B00DF8465 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E261E40CA5B00DF8465 /* CategoriesTableViewController.swift */; };
 		3F257E291E40DF0A00DF8465 /* CategoriesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E281E40DF0A00DF8465 /* CategoriesState.swift */; };
 		3F257E2B1E40E11C00DF8465 /* CategoriesReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F257E2A1E40E11C00DF8465 /* CategoriesReducer.swift */; };
@@ -36,6 +32,13 @@
 		3FA674481E3E8DF100129D0B /* MenuState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA674471E3E8DF100129D0B /* MenuState.swift */; };
 		3FA6744A1E3E963400129D0B /* MenuReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA674491E3E963400129D0B /* MenuReducer.swift */; };
 		3FC119871E428CB8006AF232 /* FlipCardAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC119861E428CB8006AF232 /* FlipCardAction.swift */; };
+		85493B631F910CA20005E96C /* StateHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85493B581F910A5E0005E96C /* StateHistoryView.swift */; };
+		85493B641F910CA20005E96C /* StateHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85493B591F910A5E0005E96C /* StateHistoryCollectionViewCell.swift */; };
+		85493B651F910CA20005E96C /* StateHistorySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85493B5A1F910A5E0005E96C /* StateHistorySliderView.swift */; };
+		85493B661F910CA20005E96C /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85493B551F910A390005E96C /* RecordingStore.swift */; };
+		85493B671F910CA20005E96C /* StandardAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85493B561F910A390005E96C /* StandardAction.swift */; };
+		85519B2C1F91E6A3003F1640 /* NavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85519B2B1F91E6A3003F1640 /* NavigationController+Extensions.swift */; };
+		85B455281F917C7000F3853E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B455271F917C7000F3853E /* Routes.swift */; };
 		D1651016F32F983625AA0C9E /* Pods_MemoryTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */; };
 		D273B743DD9CDB3347E55383 /* Pods_MemoryTunesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */; };
 /* End PBXBuildFile section */
@@ -52,10 +55,6 @@
 
 /* Begin PBXFileReference section */
 		0F378129D768A1F646389832 /* Pods-MemoryTunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.release.xcconfig"; sourceTree = "<group>"; };
-		3F257E1D1E40A2CB00DF8465 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; tabWidth = 2; };
-		3F257E201E40A30000DF8465 /* RoutingAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RoutingAction.swift; sourceTree = "<group>"; tabWidth = 2; };
-		3F257E221E40B10700DF8465 /* RoutingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RoutingState.swift; sourceTree = "<group>"; tabWidth = 2; };
-		3F257E241E40B1F300DF8465 /* RoutingReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RoutingReducer.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3F257E261E40CA5B00DF8465 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3F257E281E40DF0A00DF8465 /* CategoriesState.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CategoriesState.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3F257E2A1E40E11C00DF8465 /* CategoriesReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CategoriesReducer.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -86,6 +85,13 @@
 		3FA674491E3E963400129D0B /* MenuReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MenuReducer.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3FC119861E428CB8006AF232 /* FlipCardAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = FlipCardAction.swift; sourceTree = "<group>"; tabWidth = 2; };
 		556B017FB4128EA9499D2DE8 /* Pods-MemoryTunesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunesTests/Pods-MemoryTunesTests.release.xcconfig"; sourceTree = "<group>"; };
+		85493B551F910A390005E96C /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
+		85493B561F910A390005E96C /* StandardAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardAction.swift; sourceTree = "<group>"; };
+		85493B581F910A5E0005E96C /* StateHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryView.swift; sourceTree = "<group>"; };
+		85493B591F910A5E0005E96C /* StateHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		85493B5A1F910A5E0005E96C /* StateHistorySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistorySliderView.swift; sourceTree = "<group>"; };
+		85519B2B1F91E6A3003F1640 /* NavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extensions.swift"; sourceTree = "<group>"; };
+		85B455271F917C7000F3853E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.debug.xcconfig"; sourceTree = "<group>"; };
 		A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +121,6 @@
 		3F257E1F1E40A2DC00DF8465 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				3F257E201E40A30000DF8465 /* RoutingAction.swift */,
 				3F257E2C1E40E51800DF8465 /* ChangeCategoryAction.swift */,
 				3F7F97671E427363007C317A /* FetchTunesAction.swift */,
 				3F7F97691E4275ED007C317A /* SetCardsAction.swift */,
@@ -172,11 +177,12 @@
 		3F8882671E3B9A70009D6A6E /* MemoryTunes */ = {
 			isa = PBXGroup;
 			children = (
-				DA6EBAA61F9098F200A6C6AF /* ReSwiftRouter */,
+				85493B541F910A000005E96C /* ReSwiftRouter */,
 				3F3AE40D1E436EE20080F98E /* DataSources */,
 				3F7F97631E42703E007C317A /* Views */,
 				3F257E341E40FC9800DF8465 /* Networking */,
 				3F257E1F1E40A2DC00DF8465 /* Actions */,
+				85B455261F917C4800F3853E /* Routes */,
 				3FA674441E3E8A6F00129D0B /* ViewControllers */,
 				3FA674411E3E885700129D0B /* Reducers */,
 				3FA6743E1E3E879900129D0B /* State */,
@@ -185,7 +191,6 @@
 				3F8882711E3B9A70009D6A6E /* LaunchScreen.storyboard */,
 				3F88826F1E3B9A70009D6A6E /* Assets.xcassets */,
 				3F8882741E3B9A70009D6A6E /* Info.plist */,
-				3F257E1D1E40A2CB00DF8465 /* AppRouter.swift */,
 			);
 			path = MemoryTunes;
 			sourceTree = "<group>";
@@ -204,7 +209,6 @@
 			children = (
 				3FA6743F1E3E87B800129D0B /* AppState.swift */,
 				3FA674471E3E8DF100129D0B /* MenuState.swift */,
-				3F257E221E40B10700DF8465 /* RoutingState.swift */,
 				3F257E281E40DF0A00DF8465 /* CategoriesState.swift */,
 				3F257E2E1E40F8E700DF8465 /* GameState.swift */,
 			);
@@ -216,7 +220,6 @@
 			children = (
 				3FA674421E3E88DA00129D0B /* AppReducer.swift */,
 				3FA674491E3E963400129D0B /* MenuReducer.swift */,
-				3F257E241E40B1F300DF8465 /* RoutingReducer.swift */,
 				3F257E2A1E40E11C00DF8465 /* CategoriesReducer.swift */,
 				3F257E301E40FB2800DF8465 /* GameReducer.swift */,
 				3F58D6A01E7703940030525B /* MemoryGameLogic.swift */,
@@ -232,6 +235,35 @@
 				3F257E321E40FBB900DF8465 /* GameViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		85493B541F910A000005E96C /* ReSwiftRouter */ = {
+			isa = PBXGroup;
+			children = (
+				85493B571F910A5E0005E96C /* UI */,
+				85493B551F910A390005E96C /* RecordingStore.swift */,
+				85493B561F910A390005E96C /* StandardAction.swift */,
+			);
+			path = ReSwiftRouter;
+			sourceTree = "<group>";
+		};
+		85493B571F910A5E0005E96C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				85493B581F910A5E0005E96C /* StateHistoryView.swift */,
+				85493B591F910A5E0005E96C /* StateHistoryCollectionViewCell.swift */,
+				85493B5A1F910A5E0005E96C /* StateHistorySliderView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		85B455261F917C4800F3853E /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				85B455271F917C7000F3853E /* Routes.swift */,
+				85519B2B1F91E6A3003F1640 /* NavigationController+Extensions.swift */,
+			);
+			path = Routes;
 			sourceTree = "<group>";
 		};
 		96E0CE740CD28D3386E4E671 /* Pods */ = {
@@ -252,13 +284,6 @@
 				A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DA6EBAA61F9098F200A6C6AF /* ReSwiftRouter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ReSwiftRouter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,10 +501,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F257E251E40B1F300DF8465 /* RoutingReducer.swift in Sources */,
+				85493B631F910CA20005E96C /* StateHistoryView.swift in Sources */,
+				85493B661F910CA20005E96C /* RecordingStore.swift in Sources */,
 				3FC119871E428CB8006AF232 /* FlipCardAction.swift in Sources */,
+				85493B671F910CA20005E96C /* StandardAction.swift in Sources */,
 				3F257E2B1E40E11C00DF8465 /* CategoriesReducer.swift in Sources */,
+				85B455281F917C7000F3853E /* Routes.swift in Sources */,
+				85493B651F910CA20005E96C /* StateHistorySliderView.swift in Sources */,
 				3FA674461E3E8DB800129D0B /* MenuTableViewController.swift in Sources */,
+				85519B2C1F91E6A3003F1640 /* NavigationController+Extensions.swift in Sources */,
 				3F7F97661E427070007C317A /* CardCollectionViewCell.swift in Sources */,
 				3F257E331E40FBB900DF8465 /* GameViewController.swift in Sources */,
 				3F257E271E40CA5B00DF8465 /* CategoriesTableViewController.swift in Sources */,
@@ -489,17 +519,15 @@
 				3FA674401E3E87B800129D0B /* AppState.swift in Sources */,
 				3F7F976A1E4275ED007C317A /* SetCardsAction.swift in Sources */,
 				3F257E2D1E40E51800DF8465 /* ChangeCategoryAction.swift in Sources */,
-				3F257E1E1E40A2CB00DF8465 /* AppRouter.swift in Sources */,
 				3F7F97681E427363007C317A /* FetchTunesAction.swift in Sources */,
 				3F3AE4101E436F090080F98E /* CollectionDataSource.swift in Sources */,
 				3FA674431E3E88DA00129D0B /* AppReducer.swift in Sources */,
 				3F58D6A11E7703940030525B /* MemoryGameLogic.swift in Sources */,
 				3F8882691E3B9A70009D6A6E /* AppDelegate.swift in Sources */,
+				85493B641F910CA20005E96C /* StateHistoryCollectionViewCell.swift in Sources */,
 				3F257E311E40FB2800DF8465 /* GameReducer.swift in Sources */,
 				3F3AE4111E436F090080F98E /* TableDataSource.swift in Sources */,
 				3FA674481E3E8DF100129D0B /* MenuState.swift in Sources */,
-				3F257E231E40B10700DF8465 /* RoutingState.swift in Sources */,
-				3F257E211E40A30000DF8465 /* RoutingAction.swift in Sources */,
 				3F257E291E40DF0A00DF8465 /* CategoriesState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
