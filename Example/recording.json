@@ -1,0 +1,163 @@
+[
+  {
+    "timestamp" : 529715543.41056103,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715609.13317698,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu",
+          "game"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715610.79493999,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715611.31728601,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu",
+          "categories"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715612.64390898,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715625.08072799,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715625.70894903,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu",
+          "categories"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715629.06878102,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715629.628313,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu",
+          "game"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715654.92863798,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715657.5485,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu",
+          "game"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  },
+  {
+    "timestamp" : 529715658.94055903,
+    "action" : {
+      "type" : "RE_SWIFT_ROUTER_SET_ROUTE",
+      "payload" : {
+        "route" : [
+          "menu"
+        ],
+        "animated" : true
+      },
+      "isTypedAction" : true
+    }
+  }
+]

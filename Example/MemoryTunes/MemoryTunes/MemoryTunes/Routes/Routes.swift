@@ -24,6 +24,10 @@ class RootRoutable: Routable {
     let navigationController = UINavigationController(rootViewController:
       rootViewController)
     self.window.rootViewController = navigationController
+
+    store.rewindControlYOffset = 150
+    store.window = window
+
 		return MainViewRoutable(self.window.rootViewController!)
   }
 
