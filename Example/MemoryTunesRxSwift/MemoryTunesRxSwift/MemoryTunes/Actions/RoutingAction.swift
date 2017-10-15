@@ -30,6 +30,24 @@
 
 import ReactiveReSwift
 
-struct RoutingAction: Action {
+let routingActionTypeMap: TypeMap = [RoutingAction.type : RoutingAction.self]
+
+struct RoutingAction: StandardActionConvertible {
   let destination: RoutingDestination
+
+  static let type = "ROUTING_ACTION"
+
+  init(destination: RoutingDestination) {
+    self.destination = destination
+  }
+
+  init(_ standardAction: StandardAction) {
+    let rawValue = standardAction.payload!["destination"] as! Int
+    self.destination = RoutingDestination(rawValue: rawValue)!
+  }
+
+  func toStandardAction() -> StandardAction {
+    return StandardAction(type: RoutingAction.type, payload: ["destination" : destination.rawValue as AnyObject], isTypedAction: true)
+  }
+
 }

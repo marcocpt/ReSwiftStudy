@@ -30,6 +30,24 @@
 
 import ReactiveReSwift
 
-struct ChangeCategoryAction: Action {
+let changeCategoryActionTypeMap: TypeMap =
+  [ChangeCategoryAction.type : ChangeCategoryAction.self]
+
+struct ChangeCategoryAction: StandardActionConvertible {
+
   let categoryIndex: Int
+  static let type = "CHANGE_CATEGORY_ACTION"
+
+  init(categoryIndex: Int) {
+    self.categoryIndex = categoryIndex
+  }
+
+  init(_ standardAction: StandardAction) {
+    self.categoryIndex = standardAction.payload!["categoryIndex"] as! Int
+  }
+
+  func toStandardAction() -> StandardAction {
+    return StandardAction(type: ChangeCategoryAction.type, payload: ["categoryIndex" : categoryIndex as AnyObject], isTypedAction: true)
+  }
+
 }

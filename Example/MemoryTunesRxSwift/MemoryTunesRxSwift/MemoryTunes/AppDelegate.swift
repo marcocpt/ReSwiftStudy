@@ -40,7 +40,12 @@ let middleware = Middleware<AppState>().sideEffect { _, _, action in
     return action
   }
 
-let store = Store(reducer: appReducer, observable: Variable(AppState()), middleware: middleware)
+let store = RecordingMainStore<Variable<AppState>>(
+  reducer: appReducer,
+  observable: Variable(AppState()),
+  typeMaps: [changeCategoryActionTypeMap, routingActionTypeMap],
+  recording: "recording.json",
+  middleware: middleware)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -61,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           print("Resource count \(RxSwift.Resources.total)")
         })
     #endif
+
+    store.rewindControlYOffset = 150
+    store.window = window
     
     return true
   }

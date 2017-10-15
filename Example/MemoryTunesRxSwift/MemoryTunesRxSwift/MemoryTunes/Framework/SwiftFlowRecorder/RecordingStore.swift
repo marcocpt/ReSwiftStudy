@@ -7,17 +7,18 @@
 //
 
 import Foundation
-import ReSwift
+import ReactiveReSwift
+import RxSwift
 
 public typealias TypeMap = [String: StandardActionConvertible.Type]
 
-open class RecordingMainStore<State: StateType>: Store<State> {
+open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store<ObservableProperty> {
 
   typealias RecordedActions = [[String : AnyObject]]
 
   var recordedActions: RecordedActions = []
-  var initialState: State!
-  var computedStates: [State] = []
+  var initialState: ObservableProperty.ValueType!
+  var computedStates: [ObservableProperty.ValueType] = []
   var actionsToReplay: Int?
   let recordingPath: String?
   fileprivate var typeMap: TypeMap = [:]
@@ -55,18 +56,18 @@ open class RecordingMainStore<State: StateType>: Store<State> {
   }
 
   public init(
-    reducer: AnyReducer,
-    state: State?,
+    reducer: @escaping StoreReducer,
+    observable: ObservableProperty,
     typeMaps: [TypeMap],
     recording: String? = nil,
-    middleware: [Middleware] = []
+    middleware: StoreMiddleware = Middleware()
     ) {
 
     self.recordingPath = recording
 
-    super.init(reducer: reducer, state: state, middleware: middleware)
+    super.init(reducer: reducer, observable: observable, middleware: middleware)
 
-    self.initialState = self.state
+    self.initialState = self.observable.value
     self.computedStates.append(initialState)
 
     // merge all typemaps into one
@@ -82,20 +83,9 @@ open class RecordingMainStore<State: StateType>: Store<State> {
     }
   }
 
-  public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware]) {
-    fatalError("The current barebones implementation of ReSwiftRecorder does not support this initializer!")
-  }
 
-  public required convenience init(reducer: AnyReducer, appState: StateType) {
-    fatalError("The current barebones implementation of ReSwiftRecorder does not support this initializer!")
-  }
-
-  required convenience public init(reducer: AnyReducer, state: State?) {
-    fatalError("init(reducer:state:) has not been implemented")
-  }
-
-  required public init(reducer: AnyReducer, state: State?, middleware: [Middleware]) {
-    fatalError("init(reducer:state:middleware:) has not been implemented")
+  public required init(reducer: @escaping StoreReducer, observable: ObservableProperty, middleware: StoreMiddleware = Middleware()) {
+    fatalError("init(reducer:observable:middleware:) has not been implemented")
   }
 
   func dispatchRecorded(_ action: Action) {
@@ -104,23 +94,21 @@ open class RecordingMainStore<State: StateType>: Store<State> {
     recordAction(action)
   }
 
-  @discardableResult
-  open override func dispatch(_ action: Action) -> Any {
-    if let actionsToReplay = actionsToReplay , actionsToReplay > 0 {
-      // ignore actions that are dispatched during replay
-      return action
+  override open func dispatch(_ actions: Action...) {
+    if let actionsToReplay = actionsToReplay, actionsToReplay > 0 {
+      return
     }
 
-    super.dispatch(action)
+    actions.forEach { super.dispatch($0) }
 
-    self.computedStates.append(self.state)
+    self.computedStates.append(observable.value)
 
-    if let standardAction = convertActionToStandardAction(action) {
-      recordAction(standardAction)
-      loadedActions.append(standardAction)
+    actions.forEach {
+      if let standardAction = convertActionToStandardAction($0) {
+        recordAction(standardAction)
+        loadedActions.append(standardAction)
+      }
     }
-
-    return action
   }
 
   func recordAction(_ action: Action) {
@@ -213,17 +201,17 @@ open class RecordingMainStore<State: StateType>: Store<State> {
   fileprivate func replayToState(_ actions: [Action], state: Int) {
     if (state > computedStates.count - 1) {
       print("Rewind to \(state)...")
-      self.state = initialState
+      self.observable.value = initialState
       recordedActions = []
       actionsToReplay = state
 
       for i in 0..<state {
         dispatchRecorded(actions[i])
         self.actionsToReplay = self.actionsToReplay! - 1
-        self.computedStates.append(self.state)
+        self.computedStates.append(self.observable.value)
       }
     } else {
-      self.state = computedStates[state]
+      self.observable.value = computedStates[state]
     }
 
   }
