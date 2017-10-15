@@ -37,6 +37,10 @@
 		3FA6744A1E3E963400129D0B /* MenuReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA674491E3E963400129D0B /* MenuReducer.swift */; };
 		3FC119871E428CB8006AF232 /* FlipCardAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC119861E428CB8006AF232 /* FlipCardAction.swift */; };
 		85B688D41F8CF48F00CA6BF4 /* ReactiveReSwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */; };
+		85F0CB661F93E78E005D5B35 /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0CB611F93E775005D5B35 /* RecordingStore.swift */; };
+		85F0CB671F93E792005D5B35 /* StateHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0CB631F93E789005D5B35 /* StateHistoryCollectionViewCell.swift */; };
+		85F0CB681F93E792005D5B35 /* StateHistorySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0CB641F93E78A005D5B35 /* StateHistorySliderView.swift */; };
+		85F0CB691F93E792005D5B35 /* StateHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0CB651F93E78A005D5B35 /* StateHistoryView.swift */; };
 		D1651016F32F983625AA0C9E /* Pods_MemoryTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */; };
 		D273B743DD9CDB3347E55383 /* Pods_MemoryTunesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */; };
 		DA6EBA9D1F905B7F00A6C6AF /* Store+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */; };
@@ -101,6 +105,10 @@
 		3FA674491E3E963400129D0B /* MenuReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MenuReducer.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3FC119861E428CB8006AF232 /* FlipCardAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = FlipCardAction.swift; sourceTree = "<group>"; tabWidth = 2; };
 		556B017FB4128EA9499D2DE8 /* Pods-MemoryTunesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunesTests/Pods-MemoryTunesTests.release.xcconfig"; sourceTree = "<group>"; };
+		85F0CB611F93E775005D5B35 /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
+		85F0CB631F93E789005D5B35 /* StateHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		85F0CB641F93E78A005D5B35 /* StateHistorySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistorySliderView.swift; sourceTree = "<group>"; };
+		85F0CB651F93E78A005D5B35 /* StateHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryView.swift; sourceTree = "<group>"; };
 		910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.debug.xcconfig"; sourceTree = "<group>"; };
 		A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveReSwiftBridge.swift; sourceTree = "<group>"; };
@@ -251,6 +259,25 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		85F0CB601F93E769005D5B35 /* SwiftFlowRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				85F0CB611F93E775005D5B35 /* RecordingStore.swift */,
+				85F0CB621F93E781005D5B35 /* UI */,
+			);
+			path = SwiftFlowRecorder;
+			sourceTree = "<group>";
+		};
+		85F0CB621F93E781005D5B35 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				85F0CB631F93E789005D5B35 /* StateHistoryCollectionViewCell.swift */,
+				85F0CB641F93E78A005D5B35 /* StateHistorySliderView.swift */,
+				85F0CB651F93E78A005D5B35 /* StateHistoryView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		96E0CE740CD28D3386E4E671 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +301,7 @@
 		DA4AE71F1F8CC5FA00499051 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				85F0CB601F93E769005D5B35 /* SwiftFlowRecorder */,
 				DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */,
 				DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */,
 			);
@@ -518,6 +546,8 @@
 				3F257E271E40CA5B00DF8465 /* CategoriesTableViewController.swift in Sources */,
 				3F257E361E40FCD800DF8465 /* iTunesAPI.swift in Sources */,
 				3F257E2F1E40F8E700DF8465 /* GameState.swift in Sources */,
+				85F0CB681F93E792005D5B35 /* StateHistorySliderView.swift in Sources */,
+				85F0CB691F93E792005D5B35 /* StateHistoryView.swift in Sources */,
 				3FA6744A1E3E963400129D0B /* MenuReducer.swift in Sources */,
 				DA6EBA9D1F905B7F00A6C6AF /* Store+extensions.swift in Sources */,
 				3FA674401E3E87B800129D0B /* AppState.swift in Sources */,
@@ -529,11 +559,13 @@
 				3FA674431E3E88DA00129D0B /* AppReducer.swift in Sources */,
 				3F58D6A11E7703940030525B /* MemoryGameLogic.swift in Sources */,
 				3F8882691E3B9A70009D6A6E /* AppDelegate.swift in Sources */,
+				85F0CB661F93E78E005D5B35 /* RecordingStore.swift in Sources */,
 				3F257E311E40FB2800DF8465 /* GameReducer.swift in Sources */,
 				3F3AE4111E436F090080F98E /* TableDataSource.swift in Sources */,
 				3FA674481E3E8DF100129D0B /* MenuState.swift in Sources */,
 				3F257E231E40B10700DF8465 /* RoutingState.swift in Sources */,
 				3F257E211E40A30000DF8465 /* RoutingAction.swift in Sources */,
+				85F0CB671F93E792005D5B35 /* StateHistoryCollectionViewCell.swift in Sources */,
 				3F257E291E40DF0A00DF8465 /* CategoriesState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
