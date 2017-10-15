@@ -88,7 +88,6 @@
 		85493B581F910A5E0005E96C /* StateHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryView.swift; sourceTree = "<group>"; };
 		85493B591F910A5E0005E96C /* StateHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		85493B5A1F910A5E0005E96C /* StateHistorySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistorySliderView.swift; sourceTree = "<group>"; };
-		854A06FD1F92CE950000A148 /* ReSwiftRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReSwiftRecorder.h; sourceTree = "<group>"; };
 		85519B2B1F91E6A3003F1640 /* NavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		85B455271F917C7000F3853E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,7 +238,6 @@
 		85493B541F910A000005E96C /* ReSwiftRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				854A06FD1F92CE950000A148 /* ReSwiftRecorder.h */,
 				85493B551F910A390005E96C /* RecordingStore.swift */,
 				85493B571F910A5E0005E96C /* UI */,
 			);

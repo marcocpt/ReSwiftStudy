@@ -31,7 +31,7 @@
 import ReSwift
 import ReSwiftRouter
 
-var store = RecordingMainStore<AppState>(reducer: appReducer, state: nil, typeMaps: [], recording: "recording.json")
+var store = RecordingMainStore<AppState>(reducer: appReducer, state: nil, typeMaps: [changeCategoryActionTypeMap, ReSwiftRouter.typeMap], recording: "recording.json")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,13 +51,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      window would not have rootVC at completion of this method
      which causes a crash.
      */
-    window.rootViewController = UIViewController()
-    let rootRoutable = RootRoutable(window: window)
+    let rootViewController =
+      storyboard.instantiateViewController(withIdentifier:
+        RouteID.menu.storyboardID)
+    let navigationController = UINavigationController(rootViewController:
+      rootViewController)
+    window.rootViewController = navigationController
+    let rootRoutable = MainViewRoutable(navigationController)
     appRouter = Router(store: store, rootRoutable: rootRoutable) { (state) -> Subscription<NavigationState> in
       state.select { $0.navigationState }
     }
     store.dispatch(ReSwiftRouter.SetRouteAction([RouteID.menu.rawValue]))
     window.makeKeyAndVisible()
+
+    store.rewindControlYOffset = 150
+    store.window = window
     
     return true
   }

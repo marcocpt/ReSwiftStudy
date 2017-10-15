@@ -34,9 +34,9 @@ extension UINavigationController {
 
 extension UINavigationController: UINavigationBarDelegate  {
 
-  public func navigationBar(_ navigationBar: UINavigationBar, didPop item: UINavigationItem) {
-			let newRoute = Array(store.state.navigationState.route.dropLast())
-      let routeAction = ReSwiftRouter.SetRouteAction(newRoute)
-      store.dispatch(routeAction)
-  }
+//  public func navigationBar(_ navigationBar: UINavigationBar, didPop item: UINavigationItem) {
+//    let newRoute = Array(store.state.navigationState.route.dropLast())
+//    let routeAction = ReSwiftRouter.SetRouteAction(newRoute)
+//    store.dispatch(routeAction)
+//  }
 }

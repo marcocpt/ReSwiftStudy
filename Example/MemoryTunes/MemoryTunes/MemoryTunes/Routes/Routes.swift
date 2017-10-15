@@ -10,67 +10,79 @@ import ReSwiftRouter
 
 let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-class RootRoutable: Routable {
-  let window: UIWindow
-
-  init(window: UIWindow) {
-    self.window = window
-  }
-
-  func setToMenuTableView() -> Routable {
-    let rootViewController =
-      storyboard.instantiateViewController(withIdentifier:
-        RouteID.menu.storyboardID)
-    let navigationController = UINavigationController(rootViewController:
-      rootViewController)
-    self.window.rootViewController = navigationController
-
-    store.rewindControlYOffset = 150
-    store.window = window
-
-		return MainViewRoutable(self.window.rootViewController!)
-  }
-
-  func changeRouteSegment(
-    _ from: RouteElementIdentifier,
-    to: RouteElementIdentifier,
-    animated: Bool,
-    completionHandler: @escaping RoutingCompletionHandler) -> Routable {
-    completionHandler()
-    return setToMenuTableView()
-  }
-
-  func pushRouteSegment(
-    _ routeElementIdentifier: RouteElementIdentifier,
-    animated: Bool,
-    completionHandler: @escaping RoutingCompletionHandler) -> Routable {
-    completionHandler()
-    return setToMenuTableView()
-  }
-
-  func popRouteSegment(
-    _ routeElementIdentifier: RouteElementIdentifier,
-    animated: Bool,
-    completionHandler: @escaping RoutingCompletionHandler)
-  {
-    // TODO: this should technically never be called -> bug in router
-    completionHandler()
-  }
-
-  
-}
+//class RootRoutable: Routable {
+//  let window: UIWindow
+//
+//  init(window: UIWindow) {
+//    self.window = window
+//  }
+//
+//  func setToMenuTableView() -> Routable {
+//    let rootViewController =
+//      storyboard.instantiateViewController(withIdentifier:
+//        RouteID.menu.storyboardID)
+//    let navigationController = UINavigationController(rootViewController:
+//      rootViewController)
+//    self.window.rootViewController = navigationController
+//
+//    return MainViewRoutable(self.window.rootViewController!)
+//  }
+//
+//  func changeRouteSegment(
+//    _ from: RouteElementIdentifier,
+//    to: RouteElementIdentifier,
+//    animated: Bool,
+//    completionHandler: @escaping RoutingCompletionHandler) -> Routable {
+//    completionHandler()
+//    return setToMenuTableView()
+//  }
+//
+////  func pushRouteSegment(
+////    _ routeElementIdentifier: RouteElementIdentifier,
+////    animated: Bool,
+////    completionHandler: @escaping RoutingCompletionHandler) -> Routable {
+////    completionHandler()
+////    return setToMenuTableView()
+////  }
+//
+//  func popRouteSegment(
+//    _ routeElementIdentifier: RouteElementIdentifier,
+//    animated: Bool,
+//    completionHandler: @escaping RoutingCompletionHandler)
+//  {
+//    // TODO: this should technically never be called -> bug in router
+//    completionHandler()
+//  }
+//
+//  
+//}
 
 class MainViewRoutable: Routable {
-  let viewController: UIViewController
+  let navigationController: UINavigationController
 
-  init(_ viewController: UIViewController) {
-    self.viewController = viewController
+  init(_ navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
+
+  func changeRouteSegment(_ from: RouteElementIdentifier, to: RouteElementIdentifier, animated: Bool, completionHandler: @escaping RoutingCompletionHandler) -> Routable {
+//    if to == RouteID.menu.rawValue {
+//      navigationController.popToRootViewController(animated: true)
+//    }
+    completionHandler()
+    return self
   }
 
   func pushRouteSegment(
     _ routeElementIdentifier: RouteElementIdentifier,
     animated: Bool,
     completionHandler: @escaping RoutingCompletionHandler) -> Routable {
+    if routeElementIdentifier == RouteID.menu.rawValue {
+      if !navigationController.topViewController!.isKind(of: MenuTableViewController.self) {
+        navigationController.popToRootViewController(animated: true)
+      }
+      completionHandler()
+			return self
+    }
     guard let routeID = RouteID.all.filter ({
       $0.rawValue == routeElementIdentifier
     }).first else { fatalError("Cannot handle this route change!") }
@@ -78,9 +90,9 @@ class MainViewRoutable: Routable {
     let detailViewController =
       storyboard.instantiateViewController(withIdentifier:
         routeID.storyboardID)
-    (self.viewController as! UINavigationController).pushViewController(
+    navigationController.pushViewController(
       detailViewController, animated: true, completion: completionHandler)
-    return routeID.routable
+    return self
   }
 
   func popRouteSegment(
