@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     store.rewindControlYOffset = 150
     store.window = window
     
-    
+
     return true
   }
 }
