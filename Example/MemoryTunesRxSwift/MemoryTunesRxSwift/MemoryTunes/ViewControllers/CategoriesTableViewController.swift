@@ -61,6 +61,7 @@ final class CategoriesTableViewController: UITableViewController {
       .disposed(by: rx.disposeBag)
     
     tableView.rx.itemSelected.asObservable()
+      .distinctUntilChanged()
       .subscribe(onNext: { indexPath in
         store.dispatch(ChangeCategoryAction(categoryIndex: indexPath.row))
       })

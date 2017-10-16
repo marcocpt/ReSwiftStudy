@@ -34,20 +34,33 @@ let routingActionTypeMap: TypeMap = [RoutingAction.type : RoutingAction.self]
 
 struct RoutingAction: StandardActionConvertible {
   let destination: RoutingDestination
+  let source: RoutingDestination
+  let type: RoutingType
 
   static let type = "ROUTING_ACTION"
 
-  init(destination: RoutingDestination) {
+  init(destination: RoutingDestination, source: RoutingDestination, type: RoutingType) {
     self.destination = destination
+    self.source = source
+    self.type = type
   }
 
   init(_ standardAction: StandardAction) {
-    let rawValue = standardAction.payload!["destination"] as! Int
-    self.destination = RoutingDestination(rawValue: rawValue)!
+    let rawDestination = standardAction.payload!["destination"] as! String
+    let rawSource = standardAction.payload!["source"] as! String
+    let rawType = standardAction.payload!["type"] as! String
+    self.destination = RoutingDestination(rawValue: rawDestination)!
+    self.source = RoutingDestination(rawValue: rawSource)!
+    self.type = RoutingType(rawValue: rawType)!
+    
   }
 
   func toStandardAction() -> StandardAction {
-    return StandardAction(type: RoutingAction.type, payload: ["destination" : destination.rawValue as AnyObject], isTypedAction: true)
+    let payload = [
+      "destination" : destination.rawValue as AnyObject,
+      "source"      : source.rawValue as AnyObject,
+      "type"        : type.rawValue as AnyObject]
+    return StandardAction(type: RoutingAction.type, payload: payload, isTypedAction: true)
   }
 
 }

@@ -31,7 +31,7 @@
 //import  ReactiveReSwift
 
 struct AppState {
-  let routingState: RoutingState
+  var routingState: RoutingState
   let menuState: MenuState
   let categoriesState: CategoriesState
   let gameState: GameState

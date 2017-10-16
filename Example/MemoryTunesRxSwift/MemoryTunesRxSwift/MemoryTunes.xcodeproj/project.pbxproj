@@ -206,11 +206,11 @@
 				3FA674411E3E885700129D0B /* Reducers */,
 				3FA6743E1E3E879900129D0B /* State */,
 				3F8882681E3B9A70009D6A6E /* AppDelegate.swift */,
+				3F257E1D1E40A2CB00DF8465 /* AppRouter.swift */,
 				3F88826C1E3B9A70009D6A6E /* Main.storyboard */,
 				3F8882711E3B9A70009D6A6E /* LaunchScreen.storyboard */,
 				3F88826F1E3B9A70009D6A6E /* Assets.xcassets */,
 				3F8882741E3B9A70009D6A6E /* Info.plist */,
-				3F257E1D1E40A2CB00DF8465 /* AppRouter.swift */,
 			);
 			path = MemoryTunes;
 			sourceTree = "<group>";

@@ -39,15 +39,15 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
     didSet {
       if let window = window {
         let windowSize = window.bounds.size
-        stateHistoryView = StateHistorySliderView(frame: CGRect(x: 0,
-                                                                y: windowSize.height - rewindControlYOffset,
-                                                                width: windowSize.width, height: 100))
+        stateHistoryView = StateHistorySliderView(frame:
+          CGRect(x: 0, y: windowSize.height - rewindControlYOffset,
+                 width: windowSize.width, height: 100))
 
         window.addSubview(stateHistoryView!)
         window.bringSubview(toFront: stateHistoryView!)
 
-        stateHistoryView?.stateSelectionCallback = { [unowned self] selection in
-          self.replayToState(self.loadedActions, state: selection)
+        stateHistoryView?.stateSelectionCallback = { [unowned self] (selection, isReverse) in
+          self.replayToState(self.loadedActions, state: selection, isReverse: isReverse)
         }
 
         stateHistoryView?.statesCount = loadedActions.count
@@ -79,7 +79,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
 
     if let recording = recording {
       loadedActions = loadActions(recording)
-      self.replayToState(loadedActions, state: loadedActions.count)
+      self.replayToState(loadedActions, state: loadedActions.count, isReverse: false)
     }
   }
 
@@ -198,7 +198,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
     return actionsArray
   }
 
-  fileprivate func replayToState(_ actions: [Action], state: Int) {
+  fileprivate func replayToState(_ actions: [Action], state: Int, isReverse: Bool) {
     if (state > computedStates.count - 1) {
       print("Rewind to \(state)...")
       self.observable.value = initialState
@@ -211,7 +211,22 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
         self.computedStates.append(self.observable.value)
       }
     } else {
-      self.observable.value = computedStates[state]
+      if isReverse {
+        var appState = computedStates[state] as! AppState
+        var type = appState.routingState.typeState
+        let source = appState.routingState.sourceState
+        let destination = appState.routingState.navigationState
+        switch type {
+        case .show, .push, .root, .modal: return type = .pop
+        case .pop, .systemPop:            return type = .push
+        }
+        appState.routingState.typeState = type
+        appState.routingState.sourceState = destination
+        appState.routingState.navigationState = source
+        self.observable.value = appState as! ObservableProperty.ValueType
+      } else {
+        self.observable.value = computedStates[state]
+      }
     }
 
   }

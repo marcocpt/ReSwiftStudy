@@ -11,15 +11,17 @@ import UIKit
 class StateHistorySliderView: UIView {
 
     var slider: UISlider!
+    var oldSliderValue: Int = 0
 
     var statesCount: Int = 0 {
         didSet {
             slider.maximumValue = Float(statesCount)
             slider.value = Float(statesCount)
+            oldSliderValue = statesCount
         }
     }
 
-    var stateSelectionCallback: ((Int) -> Void)?
+    var stateSelectionCallback: ((Int, Bool) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,7 +38,13 @@ class StateHistorySliderView: UIView {
     }
 
     dynamic func sliderValueChanged() {
-        stateSelectionCallback?(Int(slider.value))
+        let newSliderValue = Int(slider.value)
+        var isReverse = false
+        if oldSliderValue > newSliderValue {
+          isReverse = true
+        }
+        stateSelectionCallback?(newSliderValue, isReverse)
+        oldSliderValue = newSliderValue
     }
 
 }

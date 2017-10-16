@@ -35,20 +35,35 @@ import NSObject_Rx
 
 final class AppRouter {
   
-  let navigationController: UINavigationController
+  weak var navigationController: UINavigationController!
 
   private let disposeBag = DisposeBag()
   
   init(window: UIWindow) {
-    navigationController = UINavigationController()
-    window.rootViewController = navigationController
-
+    
     store.observable.asObservable()
+      .skip(1)
       .map { $0.routingState }
+      .distinctUntilChanged({ (stat1, stat2) -> Bool in
+        (stat1.navigationState == stat2.navigationState) &&
+        (stat1.typeState == stat2.typeState)
+      })
+      .debug("routingState")
       .subscribe(onNext: { [weak self](state) in
         guard let strongSelf = self else { return }
-        let shouldsAnimate = strongSelf.navigationController.topViewController != nil
-        strongSelf.pushViewController(identifier: state.navigationState.name, animated: shouldsAnimate)
+        
+        switch state.typeState {
+        case .root:
+          let root = strongSelf.instantiateViewController(identifier: state.navigationState.rawValue)
+          strongSelf.navigationController = UINavigationController(rootViewController: root)
+          window.rootViewController = strongSelf.navigationController
+        case .show:
+          strongSelf.pushViewController(identifier: state.navigationState.rawValue, animated: true)
+        case .pop:
+          strongSelf.navigationController.popViewController(animated: true)
+        default :
+          break
+        }
       })
     	.disposed(by: disposeBag)
   }
@@ -73,16 +88,26 @@ final class AppRouter {
 
 }
 
-enum RoutingDestination: Int {
-  case menu = -1 ,game, categories
+extension UINavigationController: UINavigationBarDelegate {
+  public func navigationBar(_ navigationBar: UINavigationBar, didPop item: UINavigationItem) {
+    guard let source = store.computedStates.last?.routingState.navigationState else { fatalError() }
+    var destinationString = ""
+    if let top = self.topViewController{
+      destinationString = type(of: top).description().components(separatedBy: ".").last!
+    }
+    let destination = RoutingDestination(rawValue: destinationString)!
+    store.dispatch(RoutingAction(destination: destination, source: source ,type: .systemPop))
+    
+  }
 }
 
-extension RoutingDestination {
-  var name: String {
-    switch self {
-    case .menu: return "MenuTableViewController"
-    case .game: return "GameViewController"
-    case .categories: return "CategoriesTableViewController"
-    }
-  }
+enum RoutingDestination: String {
+  case menu = "MenuTableViewController"
+  case game = "GameViewController"
+  case categories = "CategoriesTableViewController"
+  case none = ""
+}
+
+enum RoutingType: String {
+  case root, push, modal, show, pop, systemPop
 }

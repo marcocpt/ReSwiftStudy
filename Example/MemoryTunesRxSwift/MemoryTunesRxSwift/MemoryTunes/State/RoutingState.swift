@@ -32,8 +32,12 @@
 
 struct RoutingState {
   var navigationState: RoutingDestination
+  var sourceState: RoutingDestination
+  var typeState: RoutingType
 
-  init(navigationState: RoutingDestination = .menu) {
+  init(navigationState: RoutingDestination = .menu,sourceState: RoutingDestination = .none, typeState: RoutingType = .root) {
     self.navigationState = navigationState
+    self.sourceState = sourceState
+    self.typeState = typeState
   }
 }

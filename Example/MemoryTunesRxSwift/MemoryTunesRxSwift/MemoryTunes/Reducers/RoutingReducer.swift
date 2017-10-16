@@ -35,6 +35,7 @@ let routingReducer: Reducer<RoutingState> = { action, state in
   switch action {
   case let routingAction as RoutingAction:
     state.navigationState = routingAction.destination
+    state.typeState = routingAction.type
   default: break
   }
 	return state

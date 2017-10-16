@@ -52,7 +52,6 @@ final class MenuTableViewController: UITableViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    store.dispatch(RoutingAction(destination: .menu))
   }
   
   func bind() {
@@ -68,10 +67,14 @@ final class MenuTableViewController: UITableViewController {
     tableView.rx.itemSelected
       .throttle(0.5, latest: false, scheduler: MainScheduler.instance)
       .subscribe(onNext: { indexPath in
-        guard let destination = RoutingDestination(rawValue: indexPath.row) else {
+        var destination: RoutingDestination = .game
+        switch indexPath.row {
+        case 0: destination = .game
+        case 1: destination = .categories
+        default:
           fatalError()
         }
-        store.dispatch(RoutingAction(destination: destination))
+        store.dispatch(RoutingAction(destination: destination, source: .menu, type: .show))
       })
       .disposed(by: rx.disposeBag)
   }

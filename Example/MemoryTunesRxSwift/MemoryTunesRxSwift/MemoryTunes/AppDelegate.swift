@@ -67,8 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     #endif
 
+    store.dispatch(RoutingAction(destination: .menu, source: .none, type: .root))
     store.rewindControlYOffset = 150
     store.window = window
+    
     
     return true
   }
