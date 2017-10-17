@@ -43,6 +43,7 @@
 		85F0CB691F93E792005D5B35 /* StateHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0CB651F93E78A005D5B35 /* StateHistoryView.swift */; };
 		D1651016F32F983625AA0C9E /* Pods_MemoryTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */; };
 		D273B743DD9CDB3347E55383 /* Pods_MemoryTunesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */; };
+		DA0828CF1F95CFE900B46561 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0828CE1F95CFE900B46561 /* TestViewController.swift */; };
 		DA6EBA9D1F905B7F00A6C6AF /* Store+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		85F0CB651F93E78A005D5B35 /* StateHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHistoryView.swift; sourceTree = "<group>"; };
 		910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunes/Pods-MemoryTunes.debug.xcconfig"; sourceTree = "<group>"; };
 		A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA0828CE1F95CFE900B46561 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveReSwiftBridge.swift; sourceTree = "<group>"; };
 		DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+extensions.swift"; sourceTree = "<group>"; };
 		ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +257,7 @@
 				3FA674451E3E8DB800129D0B /* MenuTableViewController.swift */,
 				3F257E261E40CA5B00DF8465 /* CategoriesTableViewController.swift */,
 				3F257E321E40FBB900DF8465 /* GameViewController.swift */,
+				DA0828CE1F95CFE900B46561 /* TestViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				3F7F976A1E4275ED007C317A /* SetCardsAction.swift in Sources */,
 				3F257E2D1E40E51800DF8465 /* ChangeCategoryAction.swift in Sources */,
 				3F257E1E1E40A2CB00DF8465 /* AppRouter.swift in Sources */,
+				DA0828CF1F95CFE900B46561 /* TestViewController.swift in Sources */,
 				3F7F97681E427363007C317A /* FetchTunesAction.swift in Sources */,
 				3F3AE4101E436F090080F98E /* CollectionDataSource.swift in Sources */,
 				3FA674431E3E88DA00129D0B /* AppReducer.swift in Sources */,

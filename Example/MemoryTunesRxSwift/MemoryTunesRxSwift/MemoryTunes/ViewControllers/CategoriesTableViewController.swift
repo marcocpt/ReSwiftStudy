@@ -37,12 +37,19 @@ final class CategoriesTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let rightButton = UIBarButtonItem(title: "test", style: .plain, target: self, action: #selector(gotoTest))
+    navigationItem.rightBarButtonItem = rightButton
+    
     tableView.do {
       $0.dataSource = nil
       $0.delegate = nil
       $0.rx.setDelegate(self).disposed(by: rx.disposeBag)
     }
     bind()
+  }
+  
+	func gotoTest() {
+    store.dispatch(RoutingAction(destination: .test, source: .categories, appearType: .show))
   }
   
   func bind() {

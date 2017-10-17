@@ -34,7 +34,7 @@ import ReactiveReSwift
 import RxSwift
 
 let middleware = Middleware<AppState>().sideEffect { _, _, action in
-  print("Received action:")
+    print("Received action:")
   }.map { _, action in
     print(action)
     return action
@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let window = UIWindow(frame: UIScreen.main.bounds)
     self.window = window
+//    window.rootViewController = UIViewController()
     window.makeKeyAndVisible()
     appRouter = AppRouter(window: window)
     
@@ -66,11 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           print("Resource count \(RxSwift.Resources.total)")
         })
     #endif
+    if store.computedStates.count
+    store.dispatch(RoutingAction(destination: .menu, source: .none, appearType: .root))
 
-    store.dispatch(RoutingAction(destination: .menu, source: .none, type: .root))
     store.rewindControlYOffset = 150
     store.window = window
-    
 
     return true
   }

@@ -44,23 +44,20 @@ final class AppRouter {
     store.observable.asObservable()
       .skip(1)
       .map { $0.routingState }
-      .distinctUntilChanged({ (stat1, stat2) -> Bool in
-        (stat1.navigationState == stat2.navigationState) &&
-        (stat1.typeState == stat2.typeState)
-      })
+      .skipWhile { $0.typeState != .root }
+      .distinctUntilChanged()
       .debug("routingState")
       .subscribe(onNext: { [weak self](state) in
         guard let strongSelf = self else { return }
-        
         switch state.typeState {
         case .root:
           let root = strongSelf.instantiateViewController(identifier: state.navigationState.rawValue)
           strongSelf.navigationController = UINavigationController(rootViewController: root)
           window.rootViewController = strongSelf.navigationController
         case .show:
-          strongSelf.pushViewController(identifier: state.navigationState.rawValue, animated: true)
+          strongSelf.pushViewController(identifier: state.navigationState.rawValue, animated: false)
         case .pop:
-          strongSelf.navigationController.popViewController(animated: true)
+          strongSelf.navigationController.popViewController(animated: false)
         default :
           break
         }
@@ -96,7 +93,7 @@ extension UINavigationController: UINavigationBarDelegate {
       destinationString = type(of: top).description().components(separatedBy: ".").last!
     }
     let destination = RoutingDestination(rawValue: destinationString)!
-    store.dispatch(RoutingAction(destination: destination, source: source ,type: .systemPop))
+    store.dispatch(RoutingAction(destination: destination, source: source ,appearType: .systemPop))
     
   }
 }
@@ -105,6 +102,7 @@ enum RoutingDestination: String {
   case menu = "MenuTableViewController"
   case game = "GameViewController"
   case categories = "CategoriesTableViewController"
+  case test = "TestViewController"
   case none = ""
 }
 

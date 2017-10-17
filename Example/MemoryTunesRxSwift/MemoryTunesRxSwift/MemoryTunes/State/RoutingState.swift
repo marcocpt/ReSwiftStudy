@@ -41,3 +41,12 @@ struct RoutingState {
     self.typeState = typeState
   }
 }
+
+extension RoutingState: Equatable {
+  static func ==(lhs: RoutingState, rhs: RoutingState) -> Bool {
+    return (lhs.navigationState == rhs.navigationState) &&
+      (lhs.sourceState == rhs.sourceState) &&
+      (lhs.typeState == rhs.typeState)
+  }
+  
+}
