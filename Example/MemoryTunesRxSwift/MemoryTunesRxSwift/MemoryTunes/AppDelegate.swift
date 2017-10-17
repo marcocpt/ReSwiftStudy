@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           print("Resource count \(RxSwift.Resources.total)")
         })
     #endif
-    if store.computedStates.count
+
     store.dispatch(RoutingAction(destination: .menu, source: .none, appearType: .root))
 
     store.rewindControlYOffset = 150

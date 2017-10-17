@@ -95,15 +95,13 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
   }
 
   override open func dispatch(_ actions: Action...) {
-    if let actionsToReplay = actionsToReplay, actionsToReplay > 0 {
-      return
-    }
-
-    actions.forEach { super.dispatch($0) }
-
-    self.computedStates.append(observable.value)
-
     actions.forEach {
+      if let actionsToReplay = actionsToReplay, actionsToReplay > 0 {
+        // ignore actions that are dispatched during replay
+        return
+      }
+      super.dispatch($0)
+      self.computedStates.append(observable.value)
       if let standardAction = convertActionToStandardAction($0) {
         recordAction(standardAction)
         loadedActions.append(standardAction)

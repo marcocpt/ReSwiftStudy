@@ -31,12 +31,12 @@
 import ReactiveReSwift
 
 let routingReducer: Reducer<RoutingState> = { action, state in
-  var state = state
+  var state: RoutingState = state
   switch action {
   case let routingAction as RoutingAction:
-    state.navigationState = routingAction.destination
-    state.sourceState = routingAction.source
-    state.typeState = routingAction.appearType
+    RoutingState.navigatedStates.append(state.navigatingState)
+    state.navigatingState = routingAction.appearing
+		
   default: break
   }
 	return state

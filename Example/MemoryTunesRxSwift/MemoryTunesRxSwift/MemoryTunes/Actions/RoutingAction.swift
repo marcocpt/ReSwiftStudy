@@ -32,35 +32,46 @@ import ReactiveReSwift
 
 let routingActionTypeMap: TypeMap = [RoutingAction.type : RoutingAction.self]
 
+typealias Appear = (from: RoutingDestination, appearType: RoutingType,
+  									to: RoutingDestination)
 struct RoutingAction: StandardActionConvertible {
-  let destination: RoutingDestination
-  let source: RoutingDestination
-  let appearType: RoutingType
+  private(set) static var appeared: [Appear] = []
+  let appearing: Appear
 
   static let type = "ROUTING_ACTION"
 
-  init(destination: RoutingDestination, source: RoutingDestination, appearType: RoutingType) {
-    self.destination = destination
-    self.source = source
-    self.appearType = appearType
+  init(appearing: Appear) {
+    self.appearing = appearing
+    RoutingAction.appeared.append(appearing)
   }
 
   init(_ standardAction: StandardAction) {
-    let rawDestination = standardAction.payload!["destination"] as! String
-    let rawSource = standardAction.payload!["source"] as! String
-    let rawAppearType = standardAction.payload!["appearType"] as! String
-    self.destination = RoutingDestination(rawValue: rawDestination)!
-    self.source = RoutingDestination(rawValue: rawSource)!
-    self.appearType = RoutingType(rawValue: rawAppearType)!
+    let appeared = standardAction.payload!["appeared"] as! [[String]]
+    RoutingAction.appeared = appeared.map { (appear) in
+      let from = RoutingDestination(rawValue: appear[0])!
+      let appearType = RoutingType(rawValue: appear[1])!
+      let to = RoutingDestination(rawValue: appear[2])!
+			return (from, appearType, to)
+    }
+
+    let appearing = standardAction.payload!["appearing"] as! [String]
+    let from = RoutingDestination(rawValue: appearing[0])!
+    let appearType = RoutingType(rawValue: appearing[1])!
+    let to = RoutingDestination(rawValue: appearing[2])!
+    self.appearing = (from, appearType, to)
     
   }
 
   func toStandardAction() -> StandardAction {
-    let payload = [
-      "destination" : destination.rawValue as AnyObject,
-      "source"      : source.rawValue as AnyObject,
-      "appearType"        : appearType.rawValue as AnyObject]
-    return StandardAction(type: RoutingAction.type, payload: payload, isTypedAction: true)
+    let appearedAny = RoutingAction.appeared.map { (appear) -> [String] in
+      return [appear.from.rawValue, appear.appearType.rawValue,
+              appear.to.rawValue]
+    } as AnyObject
+    let appearingAny = [appearing.from.rawValue, appearing.appearType.rawValue,
+                        appearing.to.rawValue] as AnyObject
+    let payload = ["appeared": appearedAny, "appearing": appearingAny]
+    return StandardAction(type: RoutingAction.type, payload: payload,
+                          isTypedAction: true)
   }
 
 }

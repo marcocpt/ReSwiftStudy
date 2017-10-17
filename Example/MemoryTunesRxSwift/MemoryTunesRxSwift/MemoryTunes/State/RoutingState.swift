@@ -31,22 +31,17 @@
 //import ReactiveReSwift
 
 struct RoutingState {
-  var navigationState: RoutingDestination
-  var sourceState: RoutingDestination
-  var typeState: RoutingType
+  static var navigatedStates: [Appear] = []
+  var navigatingState: Appear = (.none, .root, .menu)
 
-  init(navigationState: RoutingDestination = .menu,sourceState: RoutingDestination = .none, typeState: RoutingType = .root) {
-    self.navigationState = navigationState
-    self.sourceState = sourceState
-    self.typeState = typeState
-  }
 }
 
-extension RoutingState: Equatable {
-  static func ==(lhs: RoutingState, rhs: RoutingState) -> Bool {
-    return (lhs.navigationState == rhs.navigationState) &&
-      (lhs.sourceState == rhs.sourceState) &&
-      (lhs.typeState == rhs.typeState)
-  }
-  
-}
+//extension RoutingState: Equatable {
+//  static func ==(lhs: RoutingState, rhs: RoutingState) -> Bool {
+//    return (lhs.navigationState == rhs.navigationState) &&
+//      (lhs.sourceState == rhs.sourceState) &&
+//      (lhs.typeState == rhs.typeState)
+//  }
+//
+//}
+

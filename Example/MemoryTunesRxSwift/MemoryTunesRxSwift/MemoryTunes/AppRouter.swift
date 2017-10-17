@@ -44,8 +44,6 @@ final class AppRouter {
     store.observable.asObservable()
       .skip(1)
       .map { $0.routingState }
-      .skipWhile { $0.typeState != .root }
-      .distinctUntilChanged()
       .debug("routingState")
       .subscribe(onNext: { [weak self](state) in
         guard let strongSelf = self else { return }
