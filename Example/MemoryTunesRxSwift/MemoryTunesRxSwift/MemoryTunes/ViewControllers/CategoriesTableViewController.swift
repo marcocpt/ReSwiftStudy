@@ -49,7 +49,7 @@ final class CategoriesTableViewController: UITableViewController {
   }
   
 	func gotoTest() {
-    store.dispatch(RoutingAction(destination: .test, source: .categories, appearType: .show))
+    store.dispatch(RoutingAction(appearing: (.categories, .show, .test)))
   }
   
   func bind() {

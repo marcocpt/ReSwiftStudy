@@ -35,43 +35,32 @@ let routingActionTypeMap: TypeMap = [RoutingAction.type : RoutingAction.self]
 typealias Appear = (from: RoutingDestination, appearType: RoutingType,
   									to: RoutingDestination)
 struct RoutingAction: StandardActionConvertible {
-  private(set) static var appeared: [Appear] = []
   let appearing: Appear
 
   static let type = "ROUTING_ACTION"
 
   init(appearing: Appear) {
     self.appearing = appearing
-    RoutingAction.appeared.append(appearing)
   }
 
   init(_ standardAction: StandardAction) {
-    let appeared = standardAction.payload!["appeared"] as! [[String]]
-    RoutingAction.appeared = appeared.map { (appear) in
-      let from = RoutingDestination(rawValue: appear[0])!
-      let appearType = RoutingType(rawValue: appear[1])!
-      let to = RoutingDestination(rawValue: appear[2])!
-			return (from, appearType, to)
-    }
-
     let appearing = standardAction.payload!["appearing"] as! [String]
     let from = RoutingDestination(rawValue: appearing[0])!
-    let appearType = RoutingType(rawValue: appearing[1])!
+    var appearType = RoutingType(rawValue: appearing[1])!
+    if appearType == .systemPop {
+      appearType = .pop
+    }
     let to = RoutingDestination(rawValue: appearing[2])!
     self.appearing = (from, appearType, to)
     
   }
 
   func toStandardAction() -> StandardAction {
-    let appearedAny = RoutingAction.appeared.map { (appear) -> [String] in
-      return [appear.from.rawValue, appear.appearType.rawValue,
-              appear.to.rawValue]
-    } as AnyObject
     let appearingAny = [appearing.from.rawValue, appearing.appearType.rawValue,
                         appearing.to.rawValue] as AnyObject
-    let payload = ["appeared": appearedAny, "appearing": appearingAny]
+    let payload = ["appearing": appearingAny]
     return StandardAction(type: RoutingAction.type, payload: payload,
                           isTypedAction: true)
   }
-
+  
 }

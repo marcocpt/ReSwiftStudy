@@ -68,8 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     #endif
 
-    store.dispatch(RoutingAction(destination: .menu, source: .none, appearType: .root))
-
+    if store.loadedActions.count > 0 {
+      store.replayToState(store.loadedActions, state: store.loadedActions.count)
+    } else {
+      store.dispatch(RoutingAction(appearing: (.none, .root, .menu)))
+    }
+    
     store.rewindControlYOffset = 150
     store.window = window
 

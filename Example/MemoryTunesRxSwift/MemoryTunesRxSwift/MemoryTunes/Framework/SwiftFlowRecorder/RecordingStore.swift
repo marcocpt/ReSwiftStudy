@@ -46,8 +46,27 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
         window.addSubview(stateHistoryView!)
         window.bringSubview(toFront: stateHistoryView!)
 
-        stateHistoryView?.stateSelectionCallback = { [unowned self] selection in
-          self.replayToState(self.loadedActions, state: selection)
+        stateHistoryView?.stateSelectionCallback = { [unowned self] (new) in
+          if new < StateHistorySliderView.oldSliderValue {
+            guard var state = self.computedStates[new + 1] as? AppState else { return }
+            var appear: Appear = state.routingState.navigatingState
+            switch appear.appearType {
+            case .pop:
+              appear.appearType = .show
+              appear.from = state.routingState.navigatingState.to
+              appear.to = state.routingState.navigatingState.from
+            case .show, .push:
+              appear.appearType = .pop
+              appear.from = state.routingState.navigatingState.to
+              appear.to = state.routingState.navigatingState.from
+            default: break
+            }
+            state.routingState.navigatingState = appear
+            self.observable.value = state as! ObservableProperty.ValueType
+          } else {
+            self.observable.value = self.computedStates[new]
+          }
+          StateHistorySliderView.oldSliderValue = new
         }
 
         stateHistoryView?.statesCount = loadedActions.count
@@ -79,7 +98,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
 
     if let recording = recording {
       loadedActions = loadActions(recording)
-      self.replayToState(loadedActions, state: loadedActions.count)
+//      self.replayToState(loadedActions, state: loadedActions.count)
     }
   }
 
@@ -196,7 +215,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
     return actionsArray
   }
 
-  fileprivate func replayToState(_ actions: [Action], state: Int) {
+  public func replayToState(_ actions: [Action], state: Int) {
     if (state > computedStates.count - 1) {
       print("Rewind to \(state)...")
       self.observable.value = initialState

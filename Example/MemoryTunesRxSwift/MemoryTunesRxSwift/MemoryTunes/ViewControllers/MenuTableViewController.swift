@@ -74,8 +74,7 @@ final class MenuTableViewController: UITableViewController {
         default:
           fatalError()
         }
-        
-        store.dispatch(RoutingAction(destination: destination, source: .menu, appearType: .show))
+        store.dispatch(RoutingAction(appearing: (.menu, .show, destination)))
       })
       .disposed(by: rx.disposeBag)
   }

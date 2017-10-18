@@ -11,11 +11,13 @@ import UIKit
 class StateHistorySliderView: UIView {
 
     var slider: UISlider!
+    static var oldSliderValue = 0
 
     var statesCount: Int = 0 {
         didSet {
             slider.maximumValue = Float(statesCount)
             slider.value = Float(statesCount)
+            StateHistorySliderView.oldSliderValue = Int(slider.maximumValue)
         }
     }
 

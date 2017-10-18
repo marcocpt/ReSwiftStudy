@@ -35,7 +35,7 @@ import NSObject_Rx
 
 final class AppRouter {
   
-  weak var navigationController: UINavigationController!
+  var navigationController: UINavigationController!
 
   private let disposeBag = DisposeBag()
   
@@ -44,16 +44,17 @@ final class AppRouter {
     store.observable.asObservable()
       .skip(1)
       .map { $0.routingState }
+      .distinctUntilChanged()
       .debug("routingState")
       .subscribe(onNext: { [weak self](state) in
         guard let strongSelf = self else { return }
-        switch state.typeState {
+        switch state.navigatingState.appearType {
         case .root:
-          let root = strongSelf.instantiateViewController(identifier: state.navigationState.rawValue)
+          let root = strongSelf.instantiateViewController(identifier: state.navigatingState.to.rawValue)
           strongSelf.navigationController = UINavigationController(rootViewController: root)
           window.rootViewController = strongSelf.navigationController
         case .show:
-          strongSelf.pushViewController(identifier: state.navigationState.rawValue, animated: false)
+          strongSelf.pushViewController(identifier: state.navigatingState.to.rawValue, animated: false)
         case .pop:
           strongSelf.navigationController.popViewController(animated: false)
         default :
@@ -85,13 +86,14 @@ final class AppRouter {
 
 extension UINavigationController: UINavigationBarDelegate {
   public func navigationBar(_ navigationBar: UINavigationBar, didPop item: UINavigationItem) {
-    guard let source = store.computedStates.last?.routingState.navigationState else { fatalError() }
+    guard let from = store.computedStates.last?.routingState.navigatingState.to else { fatalError() }
     var destinationString = ""
     if let top = self.topViewController{
       destinationString = type(of: top).description().components(separatedBy: ".").last!
     }
-    let destination = RoutingDestination(rawValue: destinationString)!
-    store.dispatch(RoutingAction(destination: destination, source: source ,appearType: .systemPop))
+    let to = RoutingDestination(rawValue: destinationString)!
+    let appear: Appear = (from, .systemPop, to)
+    store.dispatch(RoutingAction(appearing: appear))
     
   }
 }
@@ -101,7 +103,7 @@ enum RoutingDestination: String {
   case game = "GameViewController"
   case categories = "CategoriesTableViewController"
   case test = "TestViewController"
-  case none = ""
+  case none = "None"
 }
 
 enum RoutingType: String {
