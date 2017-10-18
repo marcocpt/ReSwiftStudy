@@ -40,31 +40,46 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
       if let window = window {
         let windowSize = window.bounds.size
         stateHistoryView = StateHistorySliderView(frame:
-          CGRect(x: 0, y: windowSize.height - rewindControlYOffset,
-                 width: windowSize.width, height: 100))
+          CGRect(x: 10, y: windowSize.height - rewindControlYOffset,
+                 width: windowSize.width - 20, height: 100))
 
         window.addSubview(stateHistoryView!)
         window.bringSubview(toFront: stateHistoryView!)
 
         stateHistoryView?.stateSelectionCallback = { [unowned self] (new) in
+          if new == StateHistorySliderView.oldSliderValue {
+            return
+          }
           if new < StateHistorySliderView.oldSliderValue {
-            guard var state = self.computedStates[new + 1] as? AppState else { return }
-            var appear: Appear = state.routingState.navigatingState
-            switch appear.appearType {
-            case .pop:
-              appear.appearType = .show
-              appear.from = state.routingState.navigatingState.to
-              appear.to = state.routingState.navigatingState.from
-            case .show, .push:
-              appear.appearType = .pop
-              appear.from = state.routingState.navigatingState.to
-              appear.to = state.routingState.navigatingState.from
-            default: break
+            let action = self.loadedActions[new..<StateHistorySliderView.oldSliderValue]
+            action.reversed().forEach {
+              if let action = $0 as? RoutingAction {
+                var appear = action.appearing
+                switch appear.appearType {
+                case .pop:
+                  appear.appearType = .show
+                  appear.from = action.appearing.to
+                  appear.to = action.appearing.from
+                case .show, .push:
+                  appear.appearType = .pop
+                  appear.from = action.appearing.to
+                  appear.to = action.appearing.from
+                case .root:
+                  break
+                default:
+                  appear = action.appearing
+                }
+                store.dispatchSuper(RoutingAction(appearing: appear))
+              } else {
+                store.dispatchSuper($0)
+              }
             }
-            state.routingState.navigatingState = appear
-            self.observable.value = state as! ObservableProperty.ValueType
           } else {
-            self.observable.value = self.computedStates[new]
+            let action = self.loadedActions[StateHistorySliderView.oldSliderValue..<new]
+            action.forEach {
+              store.dispatchSuper($0)
+            }
+
           }
           StateHistorySliderView.oldSliderValue = new
         }
@@ -111,6 +126,10 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
     super.dispatch(action)
 
     recordAction(action)
+  }
+
+  func dispatchSuper(_ action: Action) {
+    super.dispatch(action)
   }
 
   override open func dispatch(_ actions: Action...) {

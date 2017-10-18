@@ -93,7 +93,9 @@ extension UINavigationController: UINavigationBarDelegate {
     }
     let to = RoutingDestination(rawValue: destinationString)!
     let appear: Appear = (from, .systemPop, to)
-    store.dispatch(RoutingAction(appearing: appear))
+    if (appear.from != appear.to) && (appear.from != .menu)	{
+      store.dispatch(RoutingAction(appearing: appear))
+    }
     
   }
 }
