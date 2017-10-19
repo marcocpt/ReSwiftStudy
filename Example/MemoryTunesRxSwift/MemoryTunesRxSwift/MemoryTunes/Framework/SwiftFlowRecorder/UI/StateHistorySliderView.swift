@@ -16,7 +16,6 @@ class StateHistorySliderView: UIView {
     var statesCount: Int = 0 {
         didSet {
             slider.maximumValue = Float(statesCount)
-//            slider.minimumValue = 1
             slider.value = Float(statesCount)
             StateHistorySliderView.oldSliderValue = Int(slider.maximumValue)
         }
