@@ -368,6 +368,7 @@
 				TargetAttributes = {
 					3F8882641E3B9A70009D6A6E = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = KCFG2TH7LM;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -722,13 +723,14 @@
 			baseConfigurationReference = 910A7D01D1033A7FF33CEE39 /* Pods-MemoryTunes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KCFG2TH7LM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MemoryTunes/Framework",
 				);
 				INFOPLIST_FILE = MemoryTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.MemoryTunes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.MemoryTunes.dhh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -739,13 +741,14 @@
 			baseConfigurationReference = 0F378129D768A1F646389832 /* Pods-MemoryTunes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KCFG2TH7LM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MemoryTunes/Framework",
 				);
 				INFOPLIST_FILE = MemoryTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.MemoryTunes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.MemoryTunes.dhh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

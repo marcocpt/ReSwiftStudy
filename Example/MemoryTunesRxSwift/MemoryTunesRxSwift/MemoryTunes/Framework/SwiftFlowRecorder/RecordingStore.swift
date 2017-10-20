@@ -51,9 +51,9 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
             return
           }
           if new < StateHistorySliderView.oldSliderValue {
-            let action = self.loadedActions[new..<StateHistorySliderView.oldSliderValue]
-            action.reversed().forEach {
-              if let action = $0 as? RoutingAction {
+            let actions = self.loadedActions[new..<StateHistorySliderView.oldSliderValue]
+            for (index, actionIn) in actions.reversed().enumerated() {
+              if let action = actionIn as? RoutingAction {
                 var appear = action.appearing
                 switch appear.appearType {
                 case .pop:
@@ -69,15 +69,21 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
                 default:
                   appear = action.appearing
                 }
-                store.dispatchSuper(RoutingAction(appearing: appear))
+                let state = self.computedStates[StateHistorySliderView.oldSliderValue - index] as! AppState
+                let routingState = RoutingState(navigatingState: appear)
+                let newState = AppState(routingState: routingState,
+                                        menuState: state.menuState,
+                                        categoriesState: state.categoriesState,
+                                        gameState: state.gameState)
+                self.observable.value = newState as! ObservableProperty.ValueType
               } else {
-                store.dispatchSuper($0)
+                self.observable.value = self.computedStates[new + index]
               }
             }
           } else {
-            let action = self.loadedActions[StateHistorySliderView.oldSliderValue..<new]
-            action.forEach {
-              store.dispatchSuper($0)
+            for index in StateHistorySliderView.oldSliderValue..<new {
+              self.observable.value = self.computedStates[index + 1]
+              
             }
 
           }
@@ -142,7 +148,8 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
       self.computedStates.append(observable.value)
       if let standardAction = convertActionToStandardAction($0) {
         recordAction(standardAction)
-        loadedActions.append(standardAction)
+        loadedActions = loadActions(self.recordingPath!)
+//        loadedActions.append(standardAction)
       }
     }
   }
