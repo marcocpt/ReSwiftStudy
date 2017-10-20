@@ -77,7 +77,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
                                         gameState: state.gameState)
                 self.observable.value = newState as! ObservableProperty.ValueType
               } else {
-                self.observable.value = self.computedStates[new + index]
+                self.observable.value = self.computedStates[StateHistorySliderView.oldSliderValue - index]
               }
             }
           } else {
@@ -132,10 +132,6 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
     super.dispatch(action)
 
     recordAction(action)
-  }
-
-  func dispatchSuper(_ action: Action) {
-    super.dispatch(action)
   }
 
   override open func dispatch(_ actions: Action...) {

@@ -46,10 +46,7 @@ struct RoutingAction: StandardActionConvertible {
   init(_ standardAction: StandardAction) {
     let appearing = standardAction.payload!["appearing"] as! [String]
     let from = RoutingDestination(rawValue: appearing[0])!
-    var appearType = RoutingType(rawValue: appearing[1])!
-    if appearType == .systemPop {
-      appearType = .pop
-    }
+    let appearType = RoutingType(rawValue: appearing[1])!
     let to = RoutingDestination(rawValue: appearing[2])!
     self.appearing = (from, appearType, to)
     

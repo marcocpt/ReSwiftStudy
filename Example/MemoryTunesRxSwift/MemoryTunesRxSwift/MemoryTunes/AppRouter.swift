@@ -56,7 +56,12 @@ final class AppRouter {
         case .show:
           strongSelf.pushViewController(identifier: state.navigatingState.to.rawValue, animated: false)
         case .pop:
-          strongSelf.navigationController.popViewController(animated: false)
+          if let description = strongSelf.navigationController.topViewController?.description,
+            let className = description.components(separatedBy: ":").first?.components(separatedBy: ".").last,
+          	className != state.navigatingState.to.rawValue {
+						strongSelf.navigationController.popViewController(animated: false)
+          }
+
         default :
           break
         }
@@ -92,7 +97,7 @@ extension UINavigationController: UINavigationBarDelegate {
       destinationString = type(of: top).description().components(separatedBy: ".").last!
     }
     let to = RoutingDestination(rawValue: destinationString)!
-    let appear: Appear = (from, .systemPop, to)
+    let appear: Appear = (from, .pop, to)
     if (appear.from != appear.to) && (appear.from != .menu) {
       if let value = store.stateHistoryView?.slider.value {
         if Int(value) == store.loadedActions.count {
@@ -116,5 +121,5 @@ enum RoutingDestination: String {
 }
 
 enum RoutingType: String {
-  case root, push, modal, show, pop, systemPop
+  case root, push, modal, show, pop
 }
