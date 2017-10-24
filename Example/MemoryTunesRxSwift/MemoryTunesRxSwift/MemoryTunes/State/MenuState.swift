@@ -30,7 +30,7 @@
 
 //import RxSwift
 
-struct MenuState {
+struct MenuState: StateType {
   let menuTitles: [String]
   
   init() {

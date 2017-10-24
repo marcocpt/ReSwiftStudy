@@ -28,9 +28,9 @@
  * THE SOFTWARE.
  */
 
-import ReactiveReSwift
+//import ReactiveReSwift
 
-struct GameState {
+struct GameState: StateType {
   var memoryCards: [MemoryCard]
   var showLoading: Bool
   var gameFinishied: Bool

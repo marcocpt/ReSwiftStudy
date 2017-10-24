@@ -30,7 +30,7 @@
 
 import UIKit
 
-import ReactiveReSwift
+//import ReactiveReSwift
 import RxSwift
 
 let middleware = Middleware<AppState>().sideEffect { _, _, action in
@@ -40,7 +40,7 @@ let middleware = Middleware<AppState>().sideEffect { _, _, action in
     return action
   }
 
-let store = RecordingMainStore<Variable<AppState>>(
+let store = RecordingMainStore<AppState>(
   reducer: appReducer,
   observable: Variable(AppState()),
   typeMaps: [changeCategoryActionTypeMap, routingActionTypeMap],

@@ -30,7 +30,7 @@
 
 //import  ReactiveReSwift
 
-struct AppState {
+struct AppState: StateType {
   let routingState: RoutingState
   let menuState: MenuState
   let categoriesState: CategoriesState

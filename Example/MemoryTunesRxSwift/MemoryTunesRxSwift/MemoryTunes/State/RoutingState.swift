@@ -30,7 +30,7 @@
 
 //import ReactiveReSwift
 
-struct RoutingState {
+struct RoutingState: StateType {
   var navigatingState: Appear = (.none, .root, .menu)
 
 }

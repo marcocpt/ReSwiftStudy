@@ -29,9 +29,9 @@
  */
 
 import RxSwift
-import ReactiveReSwift
+//import ReactiveReSwift
 
-func fetchTunes(state: AppState, store: Store<Variable<AppState>>) -> FetchTunesAction {
+func fetchTunes(state: AppState, store: Store<AppState>) -> FetchTunesAction {
   let category = state.categoriesState.currentCategorySelected
   iTunesAPI.searchFor(category: category.rawValue) {
     store.dispatch(SetCardsAction(cardImageUrls: $0))

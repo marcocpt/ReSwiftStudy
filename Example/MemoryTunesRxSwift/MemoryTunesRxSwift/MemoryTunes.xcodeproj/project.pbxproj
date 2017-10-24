@@ -45,6 +45,12 @@
 		D273B743DD9CDB3347E55383 /* Pods_MemoryTunesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69A777CC48AAFB4132D5E48 /* Pods_MemoryTunesTests.framework */; };
 		DA0828CF1F95CFE900B46561 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0828CE1F95CFE900B46561 /* TestViewController.swift */; };
 		DA6EBA9D1F905B7F00A6C6AF /* Store+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */; };
+		DAB5FCC71F9EEA9600D9D8A5 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5FCC41F9EEA8800D9D8A5 /* Action.swift */; };
+		DAB5FCC81F9EEA9600D9D8A5 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5FCC21F9EEA8700D9D8A5 /* Middleware.swift */; };
+		DAB5FCC91F9EEA9600D9D8A5 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5FCC11F9EEA8700D9D8A5 /* Reducer.swift */; };
+		DAB5FCCA1F9EEA9600D9D8A5 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5FCC31F9EEA8700D9D8A5 /* State.swift */; };
+		DAB5FCCB1F9EEA9600D9D8A5 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5FCC51F9EEA8800D9D8A5 /* Store.swift */; };
+		DAB5FCCC1F9EEA9600D9D8A5 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5FCC61F9EEA8F00D9D8A5 /* Coding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +121,12 @@
 		DA0828CE1F95CFE900B46561 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveReSwiftBridge.swift; sourceTree = "<group>"; };
 		DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+extensions.swift"; sourceTree = "<group>"; };
+		DAB5FCC11F9EEA8700D9D8A5 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		DAB5FCC21F9EEA8700D9D8A5 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
+		DAB5FCC31F9EEA8700D9D8A5 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		DAB5FCC41F9EEA8800D9D8A5 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		DAB5FCC51F9EEA8800D9D8A5 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		DAB5FCC61F9EEA8F00D9D8A5 /* Coding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		ED734A5DA694CA68A25E65BC /* Pods_MemoryTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoryTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC5D309E32012CF290EE225 /* Pods-MemoryTunesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryTunesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemoryTunesTests/Pods-MemoryTunesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,11 +316,25 @@
 		DA4AE71F1F8CC5FA00499051 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				DAB5FCC01F9EEA6C00D9D8A5 /* ReRxSwift */,
 				85F0CB601F93E769005D5B35 /* SwiftFlowRecorder */,
 				DA4AE7231F8CC81600499051 /* ReactiveReSwiftBridge.swift */,
 				DA6EBA9C1F905B7F00A6C6AF /* Store+extensions.swift */,
 			);
 			path = Framework;
+			sourceTree = "<group>";
+		};
+		DAB5FCC01F9EEA6C00D9D8A5 /* ReRxSwift */ = {
+			isa = PBXGroup;
+			children = (
+				DAB5FCC41F9EEA8800D9D8A5 /* Action.swift */,
+				DAB5FCC21F9EEA8700D9D8A5 /* Middleware.swift */,
+				DAB5FCC11F9EEA8700D9D8A5 /* Reducer.swift */,
+				DAB5FCC31F9EEA8700D9D8A5 /* State.swift */,
+				DAB5FCC51F9EEA8800D9D8A5 /* Store.swift */,
+				DAB5FCC61F9EEA8F00D9D8A5 /* Coding.swift */,
+			);
+			path = ReRxSwift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F257E251E40B1F300DF8465 /* RoutingReducer.swift in Sources */,
+				DAB5FCC71F9EEA9600D9D8A5 /* Action.swift in Sources */,
 				3FC119871E428CB8006AF232 /* FlipCardAction.swift in Sources */,
 				3F257E2B1E40E11C00DF8465 /* CategoriesReducer.swift in Sources */,
 				3FA674461E3E8DB800129D0B /* MenuTableViewController.swift in Sources */,
@@ -557,10 +584,12 @@
 				3FA674401E3E87B800129D0B /* AppState.swift in Sources */,
 				3F7F976A1E4275ED007C317A /* SetCardsAction.swift in Sources */,
 				3F257E2D1E40E51800DF8465 /* ChangeCategoryAction.swift in Sources */,
+				DAB5FCC91F9EEA9600D9D8A5 /* Reducer.swift in Sources */,
 				3F257E1E1E40A2CB00DF8465 /* AppRouter.swift in Sources */,
 				DA0828CF1F95CFE900B46561 /* TestViewController.swift in Sources */,
 				3F7F97681E427363007C317A /* FetchTunesAction.swift in Sources */,
 				3F3AE4101E436F090080F98E /* CollectionDataSource.swift in Sources */,
+				DAB5FCCA1F9EEA9600D9D8A5 /* State.swift in Sources */,
 				3FA674431E3E88DA00129D0B /* AppReducer.swift in Sources */,
 				3F58D6A11E7703940030525B /* MemoryGameLogic.swift in Sources */,
 				3F8882691E3B9A70009D6A6E /* AppDelegate.swift in Sources */,
@@ -571,7 +600,10 @@
 				3F257E231E40B10700DF8465 /* RoutingState.swift in Sources */,
 				3F257E211E40A30000DF8465 /* RoutingAction.swift in Sources */,
 				85F0CB671F93E792005D5B35 /* StateHistoryCollectionViewCell.swift in Sources */,
+				DAB5FCCB1F9EEA9600D9D8A5 /* Store.swift in Sources */,
 				3F257E291E40DF0A00DF8465 /* CategoriesState.swift in Sources */,
+				DAB5FCC81F9EEA9600D9D8A5 /* Middleware.swift in Sources */,
+				DAB5FCCC1F9EEA9600D9D8A5 /* Coding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

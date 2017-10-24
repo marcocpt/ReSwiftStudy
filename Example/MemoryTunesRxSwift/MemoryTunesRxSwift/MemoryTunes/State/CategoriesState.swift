@@ -33,7 +33,7 @@ enum Category:String {
   static let allValue = [pop, electrinic, rock, metal, rap]
 }
 
-struct CategoriesState {
+struct CategoriesState: StateType {
   let categories: [Category]
   var currentCategorySelected: Category
   

@@ -7,18 +7,18 @@
 //
 
 import Foundation
-import ReactiveReSwift
+//import ReactiveReSwift
 import RxSwift
 
 public typealias TypeMap = [String: StandardActionConvertible.Type]
 
-open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store<ObservableProperty> {
+open class RecordingMainStore<State: StateType>: Store<State> {
 
   typealias RecordedActions = [[String : AnyObject]]
 
   var recordedActions: RecordedActions = []
-  var initialState: ObservableProperty.ValueType!
-  var computedStates: [ObservableProperty.ValueType] = []
+  var initialState: State!
+  var computedStates: [State] = []
   var actionsToReplay: Int?
   let recordingPath: String?
   fileprivate var typeMap: TypeMap = [:]
@@ -75,7 +75,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
                                         menuState: state.menuState,
                                         categoriesState: state.categoriesState,
                                         gameState: state.gameState)
-                self.observable.value = newState as! ObservableProperty.ValueType
+                self.observable.value = newState as! State
               } else {
                 self.observable.value = self.computedStates[StateHistorySliderView.oldSliderValue - index]
               }
@@ -97,7 +97,7 @@ open class RecordingMainStore<ObservableProperty: ObservablePropertyType>: Store
 
   public init(
     reducer: @escaping StoreReducer,
-    observable: ObservableProperty,
+    observable: Variable<State>,
     typeMaps: [TypeMap],
     recording: String? = nil,
     middleware: StoreMiddleware = Middleware()

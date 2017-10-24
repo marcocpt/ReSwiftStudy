@@ -28,7 +28,8 @@
  * THE SOFTWARE.
  */
 
-import ReactiveReSwift
+//import ReactiveReSwift
+import Foundation
 
 private struct CategoriesReducerConstants {
   static let userDefaultCategoryKey = "currentCategoryKey"

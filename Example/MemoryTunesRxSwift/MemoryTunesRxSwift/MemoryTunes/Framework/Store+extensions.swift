@@ -6,10 +6,10 @@
 //  Copyright © 2017 raywenderlich. All rights reserved.
 //
 
-import ReactiveReSwift
+//import ReactiveReSwift
 
 extension Store {
-  public typealias ActionCreator = (_ state: ObservableProperty.ValueType, _ store: Store) -> Action
+  public typealias ActionCreator = (_ state: StateType, _ store: Store) -> Action
 
   func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
     dispatch(actionCreatorProvider(observable.value, self))

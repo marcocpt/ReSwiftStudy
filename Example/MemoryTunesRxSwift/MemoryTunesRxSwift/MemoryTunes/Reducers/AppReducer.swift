@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-import  ReactiveReSwift
+//import  ReactiveReSwift
 
 let appReducer: Reducer<AppState> = { action, state in
   return AppState(routingState:
